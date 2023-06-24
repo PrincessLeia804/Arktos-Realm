@@ -1,45 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-    <link rel="Stylesheet" href="/Arktos-Realm/style/style.css">
-</head>
-<body>
+    <link rel="Stylesheet" href="/Arktos-Realm/style/style.css" />
+  </head>
+  <body>
+    <!-- Always visible -->
     <h1>Arktos Realm - Let the hunt begin</h1>
-
 
     <!-- start screen, initally visible -->
     <div id="start-screen">
-        <div class="flex">
-            <h3>Find your way across the Ice</h3>
-        </div>
-        <div class="flex">
-            <button type="button" id="start-button">Easy</button>
-            <button type="button" id="start-button">Hard</button>
-        </div>
+      <div class="flex">
+        <img src="" alt="Tabaluga and Arktos" />
+      </div>
+      <div class="flex">
+        <h3>Find your way across the Ice</h3>
+      </div>
+      <div class="flex">
+        <button type="button" class="flex buttons">Easy</button>
+        <button type="button" class="flex buttons">Hard</button>
+      </div>
     </div>
-
 
     <!-- Game screen, initally hidden -->
-    <div id="game-screen">
-        <div>
-            <div>
-                <div>
-
-                </div>
-            </div>
-        </div>
+    <div id="game-screen" class="flex">
+      <div id="player-stats" class="flex">
+        <h3>Player Stats</h3>
+      </div>
+      <div id="game" class="flex">
+        <h3>Game Screen</h3>
+      </div>
+      <div id="arktos" class="flex">
+        <h3>Arktos</h3>
+      </div>
     </div>
-
 
     <!-- Final screen -->
     <div id="end-screen">
-        <!-- Winner-Screen -->
+      <!-- Winner-Screen -->
 
-        <!-- Loser-Screen -->
+      <!-- Loser-Screen -->
     </div>
-    
-</body>
+  </body>
 </html>
