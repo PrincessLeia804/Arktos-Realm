@@ -19,8 +19,8 @@
         <h3>Find your way across the Ice</h3>
       </div>
       <div class="flex">
-        <button type="button" class="flex buttons">Easy</button>
-        <button type="button" class="flex buttons">Hard</button>
+        <button type="button" class="flex buttons" id="start-easy">Easy</button>
+        <button type="button" class="flex buttons" id="'start-hard">Hard</button>
       </div>
     </div>
 
@@ -32,6 +32,7 @@
       <div id="game" class="flex">
         <h3>Game Screen</h3>
         <div class="container">
+            <!-- divs to be created via JS based on difficulty or level -->
           <div></div>
           <div></div>
           <div></div>
@@ -69,7 +70,7 @@
       </div>
     </div>
 
-    <!-- Final screen -->
+    <!-- Final screen - depending on result -->
     <div id="end-screen">
       <div>
         <!-- Winner-Screen -->
@@ -94,5 +95,9 @@
         </div>
       </div>
     </div>
+    <!-- Link js.files here -->
+    <script type="text/javascript" src="/Arktos-Realm/src/game.js"></script>
+    <script type="text/javascript" src="/Arktos-Realm/src/player.js"></script>
+    <script type="text/javascript" src="/Arktos-Realm/src/main.js"></script>
   </body>
 </html>
