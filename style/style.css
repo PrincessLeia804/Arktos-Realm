@@ -14,6 +14,13 @@ h1 {
     color: #008f8f;
 }
 
+h2 {
+    color: white;
+    font-weight: 600;
+    font-size: 2 rem;
+    text-align: center;
+}
+
 h3 {
     text-align: center;
     font-size: 2rem;
@@ -47,7 +54,8 @@ h3 {
     background:linear-gradient(to bottom, #408c99 5%, #599bb3 100%);
 	background-color:#408c99;
 }
-
+ 
+/* Start Screen Setup */
 #start-screen {
     display: none;
     align-items: stretch;
@@ -59,7 +67,10 @@ h3 {
 }
 
 
+
+/* Game Screen Setup */
 #game-screen {
+    display: none;
     justify-content: space-between;
     border: 2px solid green;
     flex-direction: row;
@@ -90,10 +101,6 @@ h3 {
     width: 25%;
 }
 
-
-#end-screen {
-    display: none;
-}
 
 
 /* Hexagon Shapes */
@@ -129,3 +136,36 @@ h3 {
   .container div:hover {
     background: rgb(231, 19, 164);
   }
+
+
+  /* End-Screen Setup */
+  #end-screen {
+    display: flex;
+    align-items: stretch;
+    height: 40vmax;
+    margin: 10% 15%;
+    flex-direction: column;
+    justify-content: space-evenly;
+    background-color: rgba(125, 201, 236, 0.8);
+}
+
+
+  #winner {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: stretch;
+    height: 40vmax;
+    border: 2px solid red;
+  }
+
+  #loser {
+    display: none;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: stretch;
+    height: 40vmax;
+    border: 2px solid black;
+  }
+
+
