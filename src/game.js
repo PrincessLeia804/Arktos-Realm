@@ -28,7 +28,7 @@ class Maze {
     }
 
     createMaze() {
-        // create tiles
+        // create tiles-matrix
         for(let i = 1; i <= this.sizeOfMaze; i++){
             let addDiv = document.createElement('div');
             addDiv.setAttribute("id", i);
@@ -37,12 +37,37 @@ class Maze {
         }
 
 
-        // create array for possible tile-connections to randomly create a way through the maze
-        let mazeCalcArr = [];
          
-        // 1. calc amount of tiles per row
-        // const tilesPerRow = document.getElementByClass("container").style.width
-        // console.log(tilesPerRow);
+        // 1. calc amount of tiles per row   !!! limit to equal-length rows
+        const containerWidth = document.getElementById("game-container").offsetWidth
+        const hexagonWidth = document.getElementById("1").offsetWidth + 8
+
+        // create array for possible tile-connections to randomly create a way through the maze
+        const hexagonsPerRow = Math.floor(containerWidth / hexagonWidth)
+        let mazeCalcArr = [-(hexagonsPerRow - 1), 1, (hexagonsPerRow - 1), hexagonsPerRow];
+
+        // define start-ids - ?? set grid limitation - equal amount of tiles per row
+        let startTilesId = []
+        for (let i = 1; i <= this.sizeOfMaze; i + hexagonsPerRow){
+                startTilesId.push(i)
+        }
+
+        // define end-ids
+        let endTilesId = []
+        for (let i = hexagonsPerRow; i < this.sizeOfMaze; i + hexagonsPerRow){
+            startTilesId.push(i)
+        }
+
+        // create random way through the maze, set the starting point
+        let wayThroughMaze = [startTilesId[Math.floor(Math.random() * startTilesId.length)]]
+        
+        // create random way based on options. Stop, when outer tile has been reached
+        let randomStepId = Math.floor(Math.random() * 4);
+
+        do {
+            wayThroughMaze.push(mazeCalcArr[randomStepId]);
+        } while (!endTilesId.includes(randomStepId))
+
     }
 }
 
