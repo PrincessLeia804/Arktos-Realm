@@ -12,7 +12,7 @@ class Maze {
         this.hexagonsPerColumn = 0;
         this.path = [] //hexagon ids - randomly chosen
         this.timeCount = 60;
-        this.lives = 3;
+        this.lives = 5;
         this.isGameOver = false; // true, when all ids have been clicked in the correct order
     }
 
@@ -29,8 +29,8 @@ class Maze {
 
         // 1. create maze grid based on user's screen size (width, height of game container) 
         let containerWidth = document.getElementById("game-container").offsetWidth;
-        
-        
+
+
         // check if easy-mode and reduce container width
         // if(this.gameModeEasy){
         //     let easyGameContainer = document.getElementById("game")
@@ -38,7 +38,7 @@ class Maze {
         //     // easyGameContainer.style.maxWidth = `${containerWidth / 1.5}px`
         //     containerWidth = easyGameContainer.offsetWidth
         // }
-        
+
 
         const containerHeight = document.getElementById("game-container").offsetHeight;
 
@@ -59,8 +59,12 @@ class Maze {
 
             document.getElementById("game-container").appendChild(addDiv);
         }
-
+        this.createPlayerScreen();
         this.createPath();
+    }
+
+    createPlayerScreen() {
+        document.getElementById("playerLives").innerHTML = `${this.lives}`
     }
 
 
@@ -182,28 +186,44 @@ class Maze {
 
     play() {
         let allHexagons = document.querySelectorAll(".hexagon")
+        let clickedTileCount = 0;
 
-    // Remove all event listeners
-    const removeListeners = () => {
-        for (let j = 0; j < allHexagons.length; j++) { 
-        allHexagons[j].removeEventListener("click", clickHandler);
-    }
-    }
-
-    // Click event listener
-    const clickHandler = (e) => {
-        if(this.path.includes(parseInt(e.target.id))){
-            e.currentTarget.style["background-color"] = "rgb(231, 19, 164)";
-        }else{
-            console.error("Wrong")
+        // Remove all event listeners
+        const removeListeners = () => {
+            for (let j = 0; j < allHexagons.length; j++) {
+                allHexagons[j].removeEventListener("click", clickHandler);
+            }
         }
-    // removeListeners();
+
+        // Click event listener
+        const clickHandler = (e) => {
+            clickedTileCount += 1
+
+
+            if (this.path[clickedTileCount - 1] === (parseInt(e.target.id))) {
+                e.currentTarget.style["background-color"] = "rgb(231, 19, 164)";
+            } else {
+                this.lives -= 1
+                if (this.lives === 0) {
+                    removeListeners();
+                    this.lostGame();
+                }
+                clickedTileCount -= 1
+                document.getElementById("playerLives").innerHTML = `${this.lives}`
+            }
+        }
+
+
+        // Add event listeners
+        for (let i = 0; i < allHexagons.length; i++) {
+            allHexagons[i].addEventListener("click", clickHandler);
+        }
+
     }
 
-    // Add event listeners
-    for (let i = 0; i < allHexagons.length; i++) {
-        allHexagons[i].addEventListener("click", clickHandler);
-    }
+    lostGame() {
+        this.gameScreen.style.display = "none";
+        this.gameEndScreen.style.display = "flex";
 
     }
 }
