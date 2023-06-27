@@ -177,17 +177,34 @@ class Maze {
                 }, 3000);
             }
         }, 200);
-        // this.play()
+        this.play()
     }
 
-    // play() {
-    //     let allHexagons = document.querySelector(".hexagon")
+    play() {
+        let allHexagons = document.querySelectorAll(".hexagon")
 
-    //     allHexagons.addEventListener('click', tilesClicked)
+    // Remove all event listeners
+    const removeListeners = () => {
+        for (let j = 0; j < allHexagons.length; j++) { 
+        allHexagons[j].removeEventListener("click", clickHandler);
+    }
+    }
 
-    //     function tilesClicked(event) {
-    //         console.log(event.target.id);
-    //       }
-    // }
+    // Click event listener
+    const clickHandler = (e) => {
+        if(this.path.includes(parseInt(e.target.id))){
+            e.currentTarget.style["background-color"] = "rgb(231, 19, 164)";
+        }else{
+            console.error("Wrong")
+        }
+    // removeListeners();
+    }
+
+    // Add event listeners
+    for (let i = 0; i < allHexagons.length; i++) {
+        allHexagons[i].addEventListener("click", clickHandler);
+    }
+
+    }
 }
 
