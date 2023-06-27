@@ -40,9 +40,9 @@ class Maze {
 
         // 3. add hexagon-divs based on the calculated grid and add IDs to each hexagon
         for (let i = 1; i <= this.sizeOfMaze; i++) {
-            let addDiv = document.createElement('div');
-            addDiv.setAttribute("id", i);
-            addDiv.innerHTML = `${i}`
+            let addDiv = document.createElement('div')
+            addDiv.setAttribute("id", i)
+            addDiv.setAttribute("class", "hexagon")
 
             document.getElementById("game-container").appendChild(addDiv);
         }
@@ -66,6 +66,7 @@ class Maze {
         for (let i = this.hexagonsPerRow; i <= this.sizeOfMaze; i += this.hexagonsPerRow) {
             endTilesId.push(i)
         }
+
 
         // 3. create array with possible tile-connections for each next step (important: connection-difference between even and odd rowsa)
         const nextStepOddRow = [-(this.hexagonsPerRow), 1, (this.hexagonsPerRow)];
@@ -93,36 +94,36 @@ class Maze {
         for (let i = 0; i < this.sizeOfMaze; i++) {
 
             // 1. check the current row
-            switch(true) {
+            switch (true) {
                 case this.path[this.path.length - 1] / this.hexagonsPerRow <= 1:
-                case this.path[this.path.length - 1] / this.hexagonsPerRow > 2 && this.path[this.path.length - 1] /this.hexagonsPerRow <= 3 :
-                case this.path[this.path.length - 1] / this.hexagonsPerRow > 4 && this.path[this.path.length - 1] /this.hexagonsPerRow <= 5 :
-                case this.path[this.path.length - 1] / this.hexagonsPerRow > 6 && this.path[this.path.length - 1] /this.hexagonsPerRow <= 7 :
-                case this.path[this.path.length - 1] / this.hexagonsPerRow > 8 && this.path[this.path.length - 1] /this.hexagonsPerRow <= 9 :
+                case this.path[this.path.length - 1] / this.hexagonsPerRow > 2 && this.path[this.path.length - 1] / this.hexagonsPerRow <= 3:
+                case this.path[this.path.length - 1] / this.hexagonsPerRow > 4 && this.path[this.path.length - 1] / this.hexagonsPerRow <= 5:
+                case this.path[this.path.length - 1] / this.hexagonsPerRow > 6 && this.path[this.path.length - 1] / this.hexagonsPerRow <= 7:
+                case this.path[this.path.length - 1] / this.hexagonsPerRow > 8 && this.path[this.path.length - 1] / this.hexagonsPerRow <= 9:
                     isOddRow = true;
                     break;
                 default:
-                    isOddRow = false;    
+                    isOddRow = false;
             }
 
 
             // 1. create random index to chose the next step, both arrays have the same length
             randomArrId = [Math.floor(Math.random() * nextStepOddRow.length)]
-            
+
             // 2. update next step based on even/odd row
-            if(isOddRow) {
+            if (isOddRow) {
                 nextStep = this.path[this.path.length - 1] + nextStepOddRow[randomArrId]
-            }else{
+            } else {
                 nextStep = this.path[this.path.length - 1] + nextStepEvenRow[randomArrId]
             }
-            
+
 
 
 
             // 3. check if nextStep keeps inside the boundaries (above 0, below grid-size), and doesn't build 3 hexagon clusters
             if (!this.path.includes(nextStep) && 0 < nextStep && nextStep < this.sizeOfMaze && this.path[this.path.length - 2] !== nextStep - 1) {
                 // check also if the end was reached. If so add last step and break the loop
-                if (endTilesId.includes(nextStep)) { 
+                if (endTilesId.includes(nextStep)) {
                     this.path.push(nextStep);
                     break;
                 } else {
@@ -136,31 +137,31 @@ class Maze {
     }
 
     previewSolution() {     //light the way at the beginning of the game
-        
-        let solution;
-        let counter = 1
 
-        // show each tile after another with a 1sec delay
-        const intervalId1 = setInterval (() => {
+        let solution;
+        let counter = 0
+
+        // show each tile after another with a delay
+        const intervalId1 = setInterval(() => {
             solution = document.querySelector(`[id="${this.path[counter]}"]`)
-            solution.style.background = "rgb(231, 19, 164)";
+            solution.style.background = "rgb(231, 19, 164)"
 
             counter++;
 
-            if (counter >= this.path.length){
-                clearInterval(intervalId1);
+            if (counter >= this.path.length) {
+                clearInterval(intervalId1)
+
+                // return the path to normal colors after 3 seconds
+                const timeoutId = setTimeout(() => {
+                    // select by class to return color
+                    let hexagonContainer = document.querySelectorAll(".hexagon")
+                    hexagonContainer.forEach(div => {
+                        div.style.background = "rgb(66, 104, 186)"
+                    })
+
+                }, 3000);
             }
-        }, 1000);
-
-
-        // return the path to normal colors after 3 seconds
-        
-        // const timeoutId = setTimeout (() => {
-        //     // select by class to return color
-        //     solution = document.querySelector()
-        //     solution.style.background = "rgb(66, 104, 186)";
-
-        // }, 3000);
+        }, 200);
     }
 }
 
