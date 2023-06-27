@@ -12,7 +12,7 @@ class Maze {
         this.hexagonsPerColumn = 0;
         this.path = [] //hexagon ids - randomly chosen
         this.timeCount = 60;
-        this.lives = 3;
+        this.lives = 5;
         this.isGameOver = false; // true, when all ids have been clicked in the correct order
     }
 
@@ -27,27 +27,44 @@ class Maze {
 
     createMaze() {
 
-
         // 1. create maze grid based on user's screen size (width, height of game container) 
-        const containerWidth = document.getElementById("game-container").offsetWidth;
+        let containerWidth = document.getElementById("game-container").offsetWidth;
+
+
+        // check if easy-mode and reduce container width
+        // if(this.gameModeEasy){
+        //     let easyGameContainer = document.getElementById("game")
+        //     easyGameContainer.style.padding = "10%"
+        //     // easyGameContainer.style.maxWidth = `${containerWidth / 1.5}px`
+        //     containerWidth = easyGameContainer.offsetWidth
+        // }
+
+
         const containerHeight = document.getElementById("game-container").offsetHeight;
+
+
+
         this.hexagonsPerRow = Math.floor(containerWidth / 108) + 1
         this.hexagonsPerColumn = Math.floor(containerHeight / 115) + 1
 
-
-        // 2. set amount of hexagons based on the calculation before
+        // 3. set amount of hexagons based on the calculation before
         this.sizeOfMaze = (this.hexagonsPerColumn) * (this.hexagonsPerRow)
+
 
         // 3. add hexagon-divs based on the calculated grid and add IDs to each hexagon
         for (let i = 1; i <= this.sizeOfMaze; i++) {
-            let addDiv = document.createElement('div');
-            addDiv.setAttribute("id", i);
-            addDiv.innerHTML = `${i}`
+            let addDiv = document.createElement('div')
+            addDiv.setAttribute("id", i)
+            addDiv.setAttribute("class", "hexagon")
 
             document.getElementById("game-container").appendChild(addDiv);
         }
-
+        this.createPlayerScreen();
         this.createPath();
+    }
+
+    createPlayerScreen() {
+        document.getElementById("playerLives").innerHTML = `${this.lives}`
     }
 
 
@@ -66,6 +83,7 @@ class Maze {
         for (let i = this.hexagonsPerRow; i <= this.sizeOfMaze; i += this.hexagonsPerRow) {
             endTilesId.push(i)
         }
+
 
         // 3. create array with possible tile-connections for each next step (important: connection-difference between even and odd rowsa)
         const nextStepOddRow = [-(this.hexagonsPerRow), 1, (this.hexagonsPerRow)];
@@ -93,36 +111,36 @@ class Maze {
         for (let i = 0; i < this.sizeOfMaze; i++) {
 
             // 1. check the current row
-            switch(true) {
+            switch (true) {
                 case this.path[this.path.length - 1] / this.hexagonsPerRow <= 1:
-                case this.path[this.path.length - 1] / this.hexagonsPerRow > 2 && this.path[this.path.length - 1] /this.hexagonsPerRow <= 3 :
-                case this.path[this.path.length - 1] / this.hexagonsPerRow > 4 && this.path[this.path.length - 1] /this.hexagonsPerRow <= 5 :
-                case this.path[this.path.length - 1] / this.hexagonsPerRow > 6 && this.path[this.path.length - 1] /this.hexagonsPerRow <= 7 :
-                case this.path[this.path.length - 1] / this.hexagonsPerRow > 8 && this.path[this.path.length - 1] /this.hexagonsPerRow <= 9 :
+                case this.path[this.path.length - 1] / this.hexagonsPerRow > 2 && this.path[this.path.length - 1] / this.hexagonsPerRow <= 3:
+                case this.path[this.path.length - 1] / this.hexagonsPerRow > 4 && this.path[this.path.length - 1] / this.hexagonsPerRow <= 5:
+                case this.path[this.path.length - 1] / this.hexagonsPerRow > 6 && this.path[this.path.length - 1] / this.hexagonsPerRow <= 7:
+                case this.path[this.path.length - 1] / this.hexagonsPerRow > 8 && this.path[this.path.length - 1] / this.hexagonsPerRow <= 9:
                     isOddRow = true;
                     break;
                 default:
-                    isOddRow = false;    
+                    isOddRow = false;
             }
 
 
             // 1. create random index to chose the next step, both arrays have the same length
             randomArrId = [Math.floor(Math.random() * nextStepOddRow.length)]
-            
+
             // 2. update next step based on even/odd row
-            if(isOddRow) {
+            if (isOddRow) {
                 nextStep = this.path[this.path.length - 1] + nextStepOddRow[randomArrId]
-            }else{
+            } else {
                 nextStep = this.path[this.path.length - 1] + nextStepEvenRow[randomArrId]
             }
-            
+
 
 
 
             // 3. check if nextStep keeps inside the boundaries (above 0, below grid-size), and doesn't build 3 hexagon clusters
             if (!this.path.includes(nextStep) && 0 < nextStep && nextStep < this.sizeOfMaze && this.path[this.path.length - 2] !== nextStep - 1) {
                 // check also if the end was reached. If so add last step and break the loop
-                if (endTilesId.includes(nextStep)) { 
+                if (endTilesId.includes(nextStep)) {
                     this.path.push(nextStep);
                     break;
                 } else {
@@ -136,31 +154,77 @@ class Maze {
     }
 
     previewSolution() {     //light the way at the beginning of the game
-        
-        let solution;
-        let counter = 1
 
-        // show each tile after another with a 1sec delay
-        const intervalId1 = setInterval (() => {
+        let solution;
+        let counter = 0
+
+        // show each tile after another with a delay
+        const intervalId1 = setInterval(() => {
             solution = document.querySelector(`[id="${this.path[counter]}"]`)
-            solution.style.background = "rgb(231, 19, 164)";
+            solution.setAttribute("class", "tileClicked")
+            solution.style.background = "rgb(231, 19, 164)"
 
             counter++;
 
-            if (counter >= this.path.length){
-                clearInterval(intervalId1);
+            if (counter >= this.path.length) {
+                clearInterval(intervalId1)
+
+                // return the path to normal colors after 3 seconds
+                const timeoutId = setTimeout(() => {
+                    // select by class to return color
+                    let hexagonContainer = document.querySelectorAll(".tileClicked")
+                    hexagonContainer.forEach(element => {
+                        element.removeAttribute("style")
+                        element.setAttribute("class", "hexagon")
+                    })
+
+                }, 3000);
             }
-        }, 1000);
+        }, 200);
+        this.play()
+    }
+
+    play() {
+        let allHexagons = document.querySelectorAll(".hexagon")
+        let clickedTileCount = 0;
+
+        // Remove all event listeners
+        const removeListeners = () => {
+            for (let j = 0; j < allHexagons.length; j++) {
+                allHexagons[j].removeEventListener("click", clickHandler);
+            }
+        }
+
+        // Click event listener
+        const clickHandler = (e) => {
+            clickedTileCount += 1
 
 
-        // return the path to normal colors after 3 seconds
-        
-        // const timeoutId = setTimeout (() => {
-        //     // select by class to return color
-        //     solution = document.querySelector()
-        //     solution.style.background = "rgb(66, 104, 186)";
+            if (this.path[clickedTileCount - 1] === (parseInt(e.target.id))) {
+                e.currentTarget.style["background-color"] = "rgb(231, 19, 164)";
+            } else {
+                this.lives -= 1
+                if (this.lives === 0) {
+                    removeListeners();
+                    this.lostGame();
+                }
+                clickedTileCount -= 1
+                document.getElementById("playerLives").innerHTML = `${this.lives}`
+            }
+        }
 
-        // }, 3000);
+
+        // Add event listeners
+        for (let i = 0; i < allHexagons.length; i++) {
+            allHexagons[i].addEventListener("click", clickHandler);
+        }
+
+    }
+
+    lostGame() {
+        this.gameScreen.style.display = "none";
+        this.gameEndScreen.style.display = "flex";
+
     }
 }
 

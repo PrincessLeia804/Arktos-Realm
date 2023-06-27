@@ -26,6 +26,11 @@ h3 {
     font-size: 2rem;
 }
 
+h4 {
+  text-align: center;
+  font-size: 1.8rem;
+}
+
 .flex {
     display: flex;
     justify-content: center;
@@ -138,6 +143,10 @@ h3 {
   }
 
   .container div:hover {
+    background: rgb(231, 19, 164);
+  }
+
+  .tileClicked {
     background: rgb(231, 19, 164);
   }
 

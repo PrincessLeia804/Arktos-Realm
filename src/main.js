@@ -7,7 +7,6 @@ window.addEventListener('load', () => {
     let game = new Maze();
 
     function startGame (){
-        console.log("game starts");
         game.start()
     }
 
