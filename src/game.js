@@ -8,6 +8,8 @@ class Maze {
         this.player = null;
         this.gameModeEasy = true;
         this.sizeOfMaze = 0;
+        this.hexagonsPerRow = 0;
+        this.hexagonsPerColumn = 0;
         this.mazeSolution = [] //hexagon ids - randomly chosen
         this.timeCount = 60;
         this.lives = 3;
@@ -25,62 +27,81 @@ class Maze {
 
     createMaze() {
 
-        
-        // 1. calc amount of tiles per row   !!! limit to equal-length rows
+
+        // 1. create maze grid based on user's screen size (width, height of game container) 
         const containerWidth = document.getElementById("game-container").offsetWidth;
         const containerHeight = document.getElementById("game-container").offsetHeight;
-        const hexagonsPerRow = Math.floor(containerWidth / 108)
-        const hexagonsPerColumn = Math.floor(containerHeight / 115)
-        console.log(containerHeight, containerWidth, hexagonsPerRow, hexagonsPerColumn);
+        this.hexagonsPerRow = Math.floor(containerWidth / 108) + 1
+        this.hexagonsPerColumn = Math.floor(containerHeight / 115) + 1
+        console.log(containerHeight, containerWidth, this.hexagonsPerRow, this.hexagonsPerColumn);
 
-        
-        this.sizeOfMaze = (hexagonsPerColumn + 1) * (hexagonsPerRow + 1)
+        // 2. set amount of hexagons based on the calculation before
+        this.sizeOfMaze = (this.hexagonsPerColumn) * (this.hexagonsPerRow)
 
-        // create tiles-matrix
+        // 3. add hexagon-divs based on the calculated grid and add IDs to each hexagon
         for (let i = 1; i <= this.sizeOfMaze; i++) {
             let addDiv = document.createElement('div');
             addDiv.setAttribute("id", i);
             addDiv.innerHTML = `${i}`
-        
+
             document.getElementById("game-container").appendChild(addDiv);
         }
 
+        this.createPath();
+    }
 
 
-
-
-        // create array for possible tile-connections to randomly create a way through the maze
-        
-        let mazeCalcArr = [-(hexagonsPerRow), 1, (hexagonsPerRow)];
-
-        // define start-ids - ?? set grid limitation - equal amount of tiles per row
-        let startTilesId = []
+    createPath() {
+        // 1. collect all possible starting-points (hexagon-ids)
+        const startTilesId = []
 
         for (let i = 1; i <= this.sizeOfMaze; i += hexagonsPerRow) {
             startTilesId.push(i)
         }
 
-        // define end-ids
-        let endTilesId = []
+
+        // 2. collect all possible ending-points (hexagon-ids)
+        const endTilesId = []
+
         for (let i = hexagonsPerRow; i < this.sizeOfMaze; i += hexagonsPerRow) {
             endTilesId.push(i)
         }
 
-        // create random way through the maze, set the starting point
-        let wayThroughMaze = []
-        wayThroughMaze.push(startTilesId[Math.floor(Math.random() * startTilesId.length)]) //works
-        
-        //not uodating: let wayArrLength = wayThroughMaze.length - 1
+
+        // 3. create array with possible tile-connections for each next step (important: connection-difference between even and odd rowsa)
+        const nextStepOddRow = [-(hexagonsPerRow), 1, (hexagonsPerRow)];
+        const nextStepEvenRow = [-(hexagonsPerRow - 1), 1, (hexagonsPerRow + 1)];
 
 
+
+        // build random path
+        const wayThroughMaze = []
+
+
+
+        // 1. Choose random starting point out of startTiles Array
+        wayThroughMaze.push(startTilesId[Math.floor(Math.random() * startTilesId.length)])
+
+
+        // 2. Create random next step based on nextStep-Arrays for even/odd rows
+
+        // create random Index-Id
         let randomArrId;
-        // repeatedly get random index-nr between 0 - 3 in this case
+        // create boolean to track which row the current hexagon is and which nextStep-Array needs to be used
+        let isOddRow;
+
+
+        // repeatedly get tile-connections until an endTileId is selected
         for (let i = 0; i < this.sizeOfMaze; i++) {
 
-            // create random index to chose the next move
+            // 1. create random index to chose the next step
             randomArrId = [Math.floor(Math.random() * mazeCalcArr.length)]
+
+            // 2. check the current row
+
+
             // add or subtract the next move from the last position
-            if(wayThroughMaze[wayThroughMaze.length - 1]%2 === 0 && randomArrId === 0 ){
+            if (wayThroughMaze[wayThroughMaze.length - 1] % 2 === 0 && randomArrId === 0) {
                 randomArrId = wayThroughMaze[wayThroughMaze.length - 1] + mazeCalcArr[randomArrId] + 1
             } else {
                 randomArrId = wayThroughMaze[wayThroughMaze.length - 1] + mazeCalcArr[randomArrId]
