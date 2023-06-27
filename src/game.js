@@ -4,7 +4,7 @@ class Maze {
     constructor() {
         this.startScreen = document.getElementById("start-screen");
         this.gameScreen = document.getElementById("game-screen");
-        this.gameEndScreen = document.getElementById("end-screen");
+        this.gameLostScreen = document.getElementById("loser");
         this.player = null;
         this.gameModeEasy = true;
         this.sizeOfMaze = 0;
@@ -223,7 +223,7 @@ class Maze {
 
     lostGame() {
         this.gameScreen.style.display = "none";
-        this.gameEndScreen.style.display = "flex";
+        this.gameLostScreen.style.display = "flex";
 
     }
 }

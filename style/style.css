@@ -6,12 +6,12 @@ body {
    background-repeat: no-repeat;   
    /* background-position-y: 150px; */
    font-family: 'Roboto', sans-serif;
+   color: #2f3939;
 }
 
 h1 {
     text-align: center;
     font-size: 3rem;
-    color: #008f8f;
 }
 
 h2 {
@@ -33,15 +33,26 @@ h4 {
 
 .flex {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     border: 2px solid green;
 }
 
+/* .flex h1 {
+  order: 1;
+} */
+
+.flex p, h1 {
+  align-self: center;
+  flex-direction: column;
+  order: 2;
+}
+
 .buttons {
-    margin: 15px;
-    align-items: stretch;
-    /* button styling */
-    box-shadow: 0px 10px 14px -7px #276873;
+  margin: 15px;
+  align-items: stretch;
+  /* button styling */
+  box-shadow: 0px 10px 14px -7px #276873;
 	background:linear-gradient(to bottom, #599bb3 5%, #408c99 100%);
 	background-color:#599bb3;
 	border-radius:8px;
@@ -56,7 +67,7 @@ h4 {
 }
 
 .buttons:hover {
-    background:linear-gradient(to bottom, #408c99 5%, #599bb3 100%);
+  background:linear-gradient(to bottom, #408c99 5%, #599bb3 100%);
 	background-color:#408c99;
 }
  
@@ -65,10 +76,12 @@ h4 {
     display: flex;
     align-items: stretch;
     height: 40vmax;
-    margin: 10% 15%;
+    margin: 5% 15%;
     flex-direction: column;
     justify-content: center;
-    background-color: rgba(125, 201, 236, 0.8);
+    background-color: rgba(243, 244, 245, 0.8);
+    border-radius: 20px;
+    box-shadow: 0px 10px 14px -7px #276873;
 }
 
 
@@ -80,15 +93,16 @@ h4 {
     border: 2px solid green;
     flex-direction: row;
     align-items: stretch;
-    height: 50vmax;
-    width: 50vmax
-    margin: 1%;
-    background-color: rgba(125, 201, 236, 0.8);
+    /* height: 50vmax;
+    width: 80vmax; */
+    margin: 10%;
+    background-color: rgba(243, 244, 245, 0.8);
 }
 
 #player-stats {
     flex-direction: column;
     min-width: 25%;
+    flex-shrink: 1;
 }
 
 #game {
@@ -106,7 +120,11 @@ h4 {
 #arktos {
     flex-direction: column;
     min-width: 25%;
+    flex-shrink: 1;
 }
+ #arktos img {
+  object-fit: scale-down;
+ }
 
 
 
@@ -159,7 +177,7 @@ h4 {
     margin: 10% 15%;
     flex-direction: column;
     justify-content: space-evenly;
-    background-color: rgba(125, 201, 236, 0.8);
+    background-color: rgba(243, 244, 245, 0.8);
 }
 
 
