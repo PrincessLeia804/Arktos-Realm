@@ -7,7 +7,7 @@ class Maze {
         this.gameEndScreen = document.getElementById("end-screen");
         this.player = null;
         this.gameModeEasy = true;
-        this.sizeOfMaze = 30;
+        this.sizeOfMaze = 0;
         this.mazeSolution = [] //hexagon ids - randomly chosen
         this.timeCount = 60;
         this.lives = 3;
@@ -20,14 +20,22 @@ class Maze {
         this.startScreen.style.display = "none";
         this.gameScreen.style.display = "flex";
 
-        if (!this.gameModeEasy) {
-            this.sizeOfMaze = 60;
-        }
-
         this.createMaze();
     }
 
     createMaze() {
+
+        
+        // 1. calc amount of tiles per row   !!! limit to equal-length rows
+        const containerWidth = document.getElementById("game-container").offsetWidth;
+        const containerHeight = document.getElementById("game-container").offsetHeight;
+        const hexagonsPerRow = Math.floor(containerWidth / 108)
+        const hexagonsPerColumn = Math.floor(containerHeight / 115)
+        console.log(containerHeight, containerWidth, hexagonsPerRow, hexagonsPerColumn);
+
+        
+        this.sizeOfMaze = (hexagonsPerColumn + 1) * (hexagonsPerRow + 1)
+
         // create tiles-matrix
         for (let i = 1; i <= this.sizeOfMaze; i++) {
             let addDiv = document.createElement('div');
@@ -39,12 +47,10 @@ class Maze {
 
 
 
-        // 1. calc amount of tiles per row   !!! limit to equal-length rows
-        const containerWidth = document.getElementById("game-container").offsetWidth
-        const hexagonWidth = document.getElementById("1").offsetWidth + 8
+
 
         // create array for possible tile-connections to randomly create a way through the maze
-        const hexagonsPerRow = Math.floor(containerWidth / hexagonWidth)
+        
         let mazeCalcArr = [-(hexagonsPerRow), 1, (hexagonsPerRow)];
 
         // define start-ids - ?? set grid limitation - equal amount of tiles per row
@@ -87,17 +93,17 @@ class Maze {
                 } else {
                     wayThroughMaze.push(randomArrId);
                 }
-            } else {``
+            } else {
                 continue;
             }
             console.log(wayThroughMaze);
         }
 
-        let solution;
-        for(let i = 0; i < wayThroughMaze.length; i++){
-            solution = document.querySelector(`[id="${wayThroughMaze[i]}"]`)
-            solution.style.background = "rgb(231, 19, 164)";
-        }
+        // let solution;
+        // for(let i = 0; i < wayThroughMaze.length; i++){
+        //     solution = document.querySelector(`[id="${wayThroughMaze[i]}"]`)
+        //     solution.style.background = "rgb(231, 19, 164)";
+        // }
     }
 }
 
