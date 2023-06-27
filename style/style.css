@@ -1,0 +1,171 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap');
+
+body {
+   background-image: url(/Arktos-Realm/img/background_ice.jpg);
+   background-size: auto;
+   background-repeat: no-repeat;   
+   /* background-position-y: 150px; */
+   font-family: 'Roboto', sans-serif;
+}
+
+h1 {
+    text-align: center;
+    font-size: 3rem;
+    color: #008f8f;
+}
+
+h2 {
+    color: white;
+    font-weight: 600;
+    font-size: 2 rem;
+    text-align: center;
+}
+
+h3 {
+    text-align: center;
+    font-size: 2rem;
+}
+
+.flex {
+    display: flex;
+    justify-content: center;
+    border: 2px solid green;
+}
+
+.buttons {
+    margin: 15px;
+    align-items: stretch;
+    /* button styling */
+    box-shadow: 0px 10px 14px -7px #276873;
+	background:linear-gradient(to bottom, #599bb3 5%, #408c99 100%);
+	background-color:#599bb3;
+	border-radius:8px;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-size:20px;
+	font-weight:bold;
+	padding:13px 32px;
+	text-decoration:none;
+	text-shadow:0px 1px 0px #3d768a;
+}
+
+.buttons:hover {
+    background:linear-gradient(to bottom, #408c99 5%, #599bb3 100%);
+	background-color:#408c99;
+}
+ 
+/* Start Screen Setup */
+#start-screen {
+    display: none;
+    align-items: stretch;
+    height: 40vmax;
+    margin: 10% 15%;
+    flex-direction: column;
+    justify-content: center;
+    background-color: rgba(125, 201, 236, 0.8);
+}
+
+
+
+/* Game Screen Setup */
+#game-screen {
+    display: none;
+    justify-content: space-between;
+    border: 2px solid green;
+    flex-direction: row;
+    align-items: stretch;
+    height: 50vmax;
+    margin: 1%;
+    background-color: rgba(125, 201, 236, 0.8);
+}
+
+#player-stats {
+    flex-direction: column;
+    width: 25%;
+}
+
+#game {
+    flex-direction: column;
+    justify-content: space-evenly;
+    width: 50%;
+    display:flex;
+    margin: 20px;
+    --s: 100px;  /* size  */
+    --m: 4px;    /* margin */
+    --f: calc(1.732 * var(--s) + 4 * var(--m)  - 1px);
+}
+
+#arktos {
+    flex-direction: column;
+    width: 25%;
+}
+
+
+
+/* Hexagon Shapes */
+.container {
+    font-size: 0; /*disable white space between inline block element */
+    border: 2px solid blue;
+    padding: 2%;
+}
+  
+  .container div {
+    width: var(--s);
+    margin: var(--m);
+    height: calc(var(--s)*1.1547); 
+    display: inline-block;
+    font-size:initial;
+    clip-path: polygon(0% 25%, 0% 75%, 50% 100%, 100% 75%, 100% 25%, 50% 0%);
+    background: rgb(66, 104, 186);
+    margin-bottom: calc(var(--m) - var(--s)*0.2885); 
+  }
+  /* .container div:nth-child(odd) {
+    background:green;
+  } */
+  .container::before {
+    content: "";
+    width: calc(var(--s)/2 + var(--m));
+    float: left;
+    height: 120%;
+    shape-outside: repeating-linear-gradient(     
+                     #0000 0 calc(var(--f) - 3px),      
+                     #000  0 var(--f));
+  }
+
+  .container div:hover {
+    background: rgb(231, 19, 164);
+  }
+
+
+  /* End-Screen Setup */
+  #end-screen {
+    display: flex;
+    align-items: stretch;
+    height: 40vmax;
+    margin: 10% 15%;
+    flex-direction: column;
+    justify-content: space-evenly;
+    background-color: rgba(125, 201, 236, 0.8);
+}
+
+
+  #winner {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: stretch;
+    height: 40vmax;
+    border: 2px solid red;
+  }
+
+  #loser {
+    display: none;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: stretch;
+    height: 40vmax;
+    border: 2px solid black;
+  }
+
+
