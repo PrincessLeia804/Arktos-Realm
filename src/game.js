@@ -10,7 +10,7 @@ class Maze {
         this.sizeOfMaze = 0;
         this.hexagonsPerRow = 0;
         this.hexagonsPerColumn = 0;
-        this.mazeSolution = [] //hexagon ids - randomly chosen
+        this.path = [] //hexagon ids - randomly chosen
         this.timeCount = 60;
         this.lives = 3;
         this.isGameOver = false; // true, when all ids have been clicked in the correct order
@@ -63,10 +63,9 @@ class Maze {
         // 2. collect all possible ending-points (hexagon-ids)
         const endTilesId = []
 
-        for (let i = this.hexagonsPerRow; i < this.sizeOfMaze; i += this.hexagonsPerRow) {
+        for (let i = this.hexagonsPerRow; i <= this.sizeOfMaze; i += this.hexagonsPerRow) {
             endTilesId.push(i)
         }
-
 
         // 3. create array with possible tile-connections for each next step (important: connection-difference between even and odd rowsa)
         const nextStepOddRow = [-(this.hexagonsPerRow), 1, (this.hexagonsPerRow)];
@@ -74,13 +73,10 @@ class Maze {
 
 
 
-        // build random path
-        const path = []
-
-
+        // build random path and store in this.path
 
         // 1. Choose random starting point out of startTiles Array
-        path.push(startTilesId[Math.floor(Math.random() * startTilesId.length)])
+        this.path.push(startTilesId[Math.floor(Math.random() * startTilesId.length)])
 
 
         // 2. Create random next step based on nextStep-Arrays for even/odd rows
@@ -98,60 +94,55 @@ class Maze {
 
             // 1. check the current row
             switch(true) {
-                case path[path.length - 1] / this.hexagonsPerRow <= 1:
-                case path[path.length - 1] / this.hexagonsPerRow > 2 && path[path.length - 1] /this.hexagonsPerRow <= 3 :
-                case path[path.length - 1] / this.hexagonsPerRow > 4 && path[path.length - 1] /this.hexagonsPerRow <= 5 :
-                case path[path.length - 1] / this.hexagonsPerRow > 6 && path[path.length - 1] /this.hexagonsPerRow <= 7 :
-                case path[path.length - 1] / this.hexagonsPerRow > 8 && path[path.length - 1] /this.hexagonsPerRow <= 9 :
+                case this.path[this.path.length - 1] / this.hexagonsPerRow <= 1:
+                case this.path[this.path.length - 1] / this.hexagonsPerRow > 2 && this.path[this.path.length - 1] /this.hexagonsPerRow <= 3 :
+                case this.path[this.path.length - 1] / this.hexagonsPerRow > 4 && this.path[this.path.length - 1] /this.hexagonsPerRow <= 5 :
+                case this.path[this.path.length - 1] / this.hexagonsPerRow > 6 && this.path[this.path.length - 1] /this.hexagonsPerRow <= 7 :
+                case this.path[this.path.length - 1] / this.hexagonsPerRow > 8 && this.path[this.path.length - 1] /this.hexagonsPerRow <= 9 :
                     isOddRow = true;
                     break;
                 default:
                     isOddRow = false;    
             }
 
-            console.log(isOddRow);
 
             // 1. create random index to chose the next step, both arrays have the same length
             randomArrId = [Math.floor(Math.random() * nextStepOddRow.length)]
             
             // 2. update next step based on even/odd row
             if(isOddRow) {
-                nextStep = path[path.length - 1] + nextStepOddRow[randomArrId]
+                nextStep = this.path[this.path.length - 1] + nextStepOddRow[randomArrId]
             }else{
-                nextStep = path[path.length - 1] + nextStepEvenRow[randomArrId]
+                nextStep = this.path[this.path.length - 1] + nextStepEvenRow[randomArrId]
             }
             
-
-            /* should be able to delete this */
-            // add or subtract the next move from the last position
-            // if (path[path.length - 1] % 2 === 0 && randomArrId === 0) {
-            //     randomArrId = path[path.length - 1] + mazeCalcArr[randomArrId] + 1
-            // } else {
-            //     randomArrId = path[path.length - 1] + mazeCalcArr[randomArrId]
-            // }
 
 
 
             // 3. check if nextStep keeps inside the boundaries (above 0, below grid-size)
-            if (!path.includes(nextStep) && 0 < nextStep && nextStep < this.sizeOfMaze) {
+            if (!this.path.includes(nextStep) && 0 < nextStep && nextStep < this.sizeOfMaze && this.path[this.path.length - 2] !== nextStep - 1) {
                 // check also if the end was reached. If so add last step and break the loop
                 if (endTilesId.includes(nextStep)) { 
-                    path.push(nextStep);
+                    this.path.push(nextStep);
                     break;
                 } else {
-                    path.push(nextStep);
+                    this.path.push(nextStep);
                 }
             } else {
                 continue;
             }
-            console.log(path);
+            console.log(this.path);
         }
+        this.previewSolution();
+    }
 
-        // let solution;
-        // for(let i = 0; i < path.length; i++){
-        //     solution = document.querySelector(`[id="${path[i]}"]`)
-        //     solution.style.background = "rgb(231, 19, 164)";
-        // }
+    previewSolution() {     //light the way at the beginning of the game
+        
+        let solution;
+        for(let i = 0; i < this.path.length; i++){
+            solution = document.querySelector(`[id="${this.path[i]}"]`)
+            solution.style.background = "rgb(231, 19, 164)";
+        }
     }
 }
 
