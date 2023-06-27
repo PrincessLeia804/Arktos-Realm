@@ -33,7 +33,7 @@ class Maze {
         const containerHeight = document.getElementById("game-container").offsetHeight;
         this.hexagonsPerRow = Math.floor(containerWidth / 108) + 1
         this.hexagonsPerColumn = Math.floor(containerHeight / 115) + 1
-        console.log(containerHeight, containerWidth, this.hexagonsPerRow, this.hexagonsPerColumn);
+
 
         // 2. set amount of hexagons based on the calculation before
         this.sizeOfMaze = (this.hexagonsPerColumn) * (this.hexagonsPerRow)
@@ -119,7 +119,7 @@ class Maze {
 
 
 
-            // 3. check if nextStep keeps inside the boundaries (above 0, below grid-size)
+            // 3. check if nextStep keeps inside the boundaries (above 0, below grid-size), and doesn't build 3 hexagon clusters
             if (!this.path.includes(nextStep) && 0 < nextStep && nextStep < this.sizeOfMaze && this.path[this.path.length - 2] !== nextStep - 1) {
                 // check also if the end was reached. If so add last step and break the loop
                 if (endTilesId.includes(nextStep)) { 
@@ -131,7 +131,6 @@ class Maze {
             } else {
                 continue;
             }
-            console.log(this.path);
         }
         this.previewSolution();
     }
@@ -139,10 +138,29 @@ class Maze {
     previewSolution() {     //light the way at the beginning of the game
         
         let solution;
-        for(let i = 0; i < this.path.length; i++){
-            solution = document.querySelector(`[id="${this.path[i]}"]`)
+        let counter = 1
+
+        // show each tile after another with a 1sec delay
+        const intervalId1 = setInterval (() => {
+            solution = document.querySelector(`[id="${this.path[counter]}"]`)
             solution.style.background = "rgb(231, 19, 164)";
-        }
+
+            counter++;
+
+            if (counter >= this.path.length){
+                clearInterval(intervalId1);
+            }
+        }, 1000);
+
+
+        // return the path to normal colors after 3 seconds
+        
+        // const timeoutId = setTimeout (() => {
+        //     // select by class to return color
+        //     solution = document.querySelector()
+        //     solution.style.background = "rgb(66, 104, 186)";
+
+        // }, 3000);
     }
 }
 
