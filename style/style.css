@@ -141,6 +141,10 @@ h3 {
     background: rgb(231, 19, 164);
   }
 
+  .tileClicked {
+    background: rgb(231, 19, 164);
+  }
+
 
   /* End-Screen Setup */
   #end-screen {

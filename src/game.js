@@ -27,16 +27,29 @@ class Maze {
 
     createMaze() {
 
-
         // 1. create maze grid based on user's screen size (width, height of game container) 
-        const containerWidth = document.getElementById("game-container").offsetWidth;
+        let containerWidth = document.getElementById("game-container").offsetWidth;
+        
+        
+        // check if easy-mode and reduce container width
+        // if(this.gameModeEasy){
+        //     let easyGameContainer = document.getElementById("game")
+        //     easyGameContainer.style.padding = "10%"
+        //     // easyGameContainer.style.maxWidth = `${containerWidth / 1.5}px`
+        //     containerWidth = easyGameContainer.offsetWidth
+        // }
+        
+
         const containerHeight = document.getElementById("game-container").offsetHeight;
+
+
+
         this.hexagonsPerRow = Math.floor(containerWidth / 108) + 1
         this.hexagonsPerColumn = Math.floor(containerHeight / 115) + 1
 
-
-        // 2. set amount of hexagons based on the calculation before
+        // 3. set amount of hexagons based on the calculation before
         this.sizeOfMaze = (this.hexagonsPerColumn) * (this.hexagonsPerRow)
+
 
         // 3. add hexagon-divs based on the calculated grid and add IDs to each hexagon
         for (let i = 1; i <= this.sizeOfMaze; i++) {
@@ -144,6 +157,7 @@ class Maze {
         // show each tile after another with a delay
         const intervalId1 = setInterval(() => {
             solution = document.querySelector(`[id="${this.path[counter]}"]`)
+            solution.setAttribute("class", "tileClicked")
             solution.style.background = "rgb(231, 19, 164)"
 
             counter++;
@@ -154,14 +168,26 @@ class Maze {
                 // return the path to normal colors after 3 seconds
                 const timeoutId = setTimeout(() => {
                     // select by class to return color
-                    let hexagonContainer = document.querySelectorAll(".hexagon")
-                    hexagonContainer.forEach(div => {
-                        div.style.background = "rgb(66, 104, 186)"
+                    let hexagonContainer = document.querySelectorAll(".tileClicked")
+                    hexagonContainer.forEach(element => {
+                        element.removeAttribute("style")
+                        element.setAttribute("class", "hexagon")
                     })
 
                 }, 3000);
             }
         }, 200);
+        // this.play()
     }
+
+    // play() {
+    //     let allHexagons = document.querySelector(".hexagon")
+
+    //     allHexagons.addEventListener('click', tilesClicked)
+
+    //     function tilesClicked(event) {
+    //         console.log(event.target.id);
+    //       }
+    // }
 }
 
