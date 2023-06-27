@@ -57,7 +57,7 @@ h3 {
  
 /* Start Screen Setup */
 #start-screen {
-    display: none;
+    display: flex;
     align-items: stretch;
     height: 40vmax;
     margin: 10% 15%;
@@ -76,38 +76,42 @@ h3 {
     flex-direction: row;
     align-items: stretch;
     height: 50vmax;
+    width: 50vmax
     margin: 1%;
     background-color: rgba(125, 201, 236, 0.8);
 }
 
 #player-stats {
     flex-direction: column;
-    width: 25%;
+    min-width: 25%;
 }
 
 #game {
     flex-direction: column;
     justify-content: space-evenly;
-    width: 50%;
+    align-items: center;
+    min-width: 50%;
     display:flex;
     margin: 20px;
-    --s: 100px;  /* size  */
+    --s: 100px;  /* size */
     --m: 4px;    /* margin */
     --f: calc(1.732 * var(--s) + 4 * var(--m)  - 1px);
 }
 
 #arktos {
     flex-direction: column;
-    width: 25%;
+    min-width: 25%;
 }
 
 
 
 /* Hexagon Shapes */
+
 .container {
     font-size: 0; /*disable white space between inline block element */
     border: 2px solid blue;
-    padding: 2%;
+    min-width: 90%;
+    min-height: 50%;
 }
   
   .container div {
@@ -140,7 +144,7 @@ h3 {
 
   /* End-Screen Setup */
   #end-screen {
-    display: flex;
+    display: none;
     align-items: stretch;
     height: 40vmax;
     margin: 10% 15%;
