@@ -34,21 +34,13 @@ class Maze {
         console.log(containerWidth, containerHeight);
 
 
-        // check if easy-mode and reduce container width
-        // if(this.gameModeEasy){
-        //     let easyGameContainer = document.getElementById("game")
-        //     easyGameContainer.style.padding = "10%"
-        //     // easyGameContainer.style.maxWidth = `${containerWidth / 1.5}px`
-        //     containerWidth = easyGameContainer.offsetWidth
-        // }
+        // update for hard-mode and add tiles
+        if(!this.gameModeEasy){
+            this.hexagonsPerRow + 5;
+        }
 
-
-        
-
-
+        // calculate size of hexagon - 10px for equally sized rows
         this.hexagonSize = Math.ceil((containerWidth - ((containerWidth / this.hexagonsPerRow) / 2)) / this.hexagonsPerRow)
-        // this.hexagonsPerRow = Math.ceil(containerWidth / 108)
-        // this.hexagonsPerColumn = Math.ceil(containerHeight / 100)
 
         // 3. set amount of hexagons based on the calculation before
         this.sizeOfMaze = (this.hexagonsPerColumn) * (this.hexagonsPerRow)

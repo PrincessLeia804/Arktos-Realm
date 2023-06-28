@@ -15,10 +15,10 @@ window.addEventListener('load', () => {
         startGame()
     })
 
-    // startBtnHard.addEventListener('click', () => {
-    //     game.gameModeEasy = false;
-    //     startGame()
-    // })
+    startBtnHard.addEventListener('click', () => {
+        game.gameModeEasy = false;
+        startGame()
+    })
 
     // restartBtn.addEventListener('click', () => {
     //     location.reload;

@@ -31,12 +31,20 @@ h4 {
   font-size: 1.8rem;
 }
 
-.flex {
+.flexColumn {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     border: 2px solid green;
+}
+
+.flexRow {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  border: 2px solid darkgreen;
 }
 
 .buttons {

@@ -11,33 +11,33 @@
     <h1>Arktos Realm - Let the hunt begin</h1>
 
     <!-- start screen, initally visible -->
-    <div id="start-screen" class="flex">
+    <div id="start-screen" class="flexColumn">
       <div>
         <img src="" alt="Tabaluga and Arktos" />
       </div>
-      <div class="flex">
+      <div class="flexColumn">
         <h3>Find your way across the Ice</h3>
         <p>Be careful though! Every step counts - the ice won't hold for long</p>
       </div>
-      <div class="flex">
-        <button type="button" class="flex buttons" id="start-easy">Start</button>
-        <!-- <button type="button" class="flex buttons" id="start-hard">Hard</button> -->
+      <div class="flexRow">
+        <button type="button" class="buttons" id="start-easy">Easy</button>
+        <button type="button" class="buttons" id="start-hard">Hard</button>
       </div>
     </div>
 
     <!-- Game screen, initally hidden -->
     <div id="game-screen">
-      <div id="player-stats" class="flex">
+      <div id="player-stats" class="flexColumn">
           <h3>Your Lives</h3>
           <h4 id="playerLives"></h4>
       </div>
-      <div id="game" class="flex">
+      <div id="game" class="flexColumn">
         <div id="game-container" class="container">
             <!-- divs to be created via JS based on difficulty or level -->
          
         </div>
       </div>
-      <div id="arktos" class="flex">
+      <div id="arktos" class="flexColumn">
         <h3>Arktos</h3>
         <!-- <img src="./img/Arktos_the_Snowman.webp" alt="Arktos"> -->
       </div>
