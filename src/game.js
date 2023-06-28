@@ -12,7 +12,7 @@ class Maze {
         this.hexagonsPerRow = 9;
         this.hexagonsPerColumn = 5;
         this.path = [] //hexagon ids - randomly chosen
-        this.countdown = 60;
+        this.countdown = 30;
         this.lives = 5;
         this.clickedTileCount = 0;
         this.helpCount = 2;
@@ -37,8 +37,10 @@ class Maze {
 
         // update for hard-mode and add tiles
         if (!this.gameModeEasy) {
-            this.hexagonsPerRow + 5;
+            this.hexagonsPerRow += 5;
+            this.hexagonsPerColumn += 3;
         }
+        console.log(this.hexagonsPerRow);
 
         // calculate size of hexagon - 10px for equally sized rows
         this.hexagonSize = Math.ceil((containerWidth - ((containerWidth / this.hexagonsPerRow) / 2)) / this.hexagonsPerRow)
