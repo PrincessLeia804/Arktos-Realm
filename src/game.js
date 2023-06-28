@@ -44,8 +44,8 @@ class Maze {
 
 
 
-        this.hexagonsPerRow = Math.floor(containerWidth / 108) + 1
-        this.hexagonsPerColumn = Math.floor(containerHeight / 115) + 1
+        this.hexagonsPerRow = Math.ceil(containerWidth / 108)
+        this.hexagonsPerColumn = Math.floor(containerHeight / 100)
 
         // 3. set amount of hexagons based on the calculation before
         this.sizeOfMaze = (this.hexagonsPerColumn) * (this.hexagonsPerRow)
