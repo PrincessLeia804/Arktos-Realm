@@ -1,5 +1,4 @@
 // set up game class and logic
-
 class Maze {
     constructor() {
         this.startScreen = document.getElementById("start-screen");
@@ -93,7 +92,7 @@ class Maze {
         // build random path and store in this.path
 
         // 1. Choose random starting point out of startTiles Array
-        this.path.push(startTilesId[Math.floor(Math.random() * startTilesId.length)])
+        this.path.push(startTilesId[randomIndex(startTilesId)])
 
 
         // 2. Create random next step based on nextStep-Arrays for even/odd rows
@@ -103,51 +102,40 @@ class Maze {
         // create boolean to track which row the current hexagon is and which nextStep-Array needs to be used
         let isOddRow;
         // create variable to hold next step
-        let nextStep;
+        let nextStep = 0;
 
-        // repeatedly get tile-connections until an endTileId is selected
-        while (!endTilesId.includes(nextStep)) {
-            // 1. check the current row
-            switch (true) {
-                case this.path[this.path.length - 1] / this.hexagonsPerRow <= 1:
-                case this.path[this.path.length - 1] / this.hexagonsPerRow > 2 && this.path[this.path.length - 1] / this.hexagonsPerRow <= 3:
-                case this.path[this.path.length - 1] / this.hexagonsPerRow > 4 && this.path[this.path.length - 1] / this.hexagonsPerRow <= 5:
-                case this.path[this.path.length - 1] / this.hexagonsPerRow > 6 && this.path[this.path.length - 1] / this.hexagonsPerRow <= 7:
-                case this.path[this.path.length - 1] / this.hexagonsPerRow > 8 && this.path[this.path.length - 1] / this.hexagonsPerRow <= 9:
-                    isOddRow = true;
-                    break;
-                default:
-                    isOddRow = false;
-            }
+            // repeatedly get tile-connections until an endTileId is selected
+        while (!endTilesId.includes(nextStep)){ 
+            // for(let i = 0; i < 20; i++){
+            isOddRow = checkOddRow(this.path, this.hexagonsPerRow)
 
 
             // 1. create random index to chose the next step, both arrays have the same length
-            randomArrId = [Math.floor(Math.random() * nextStepOddRow.length)]
+            randomArrId = randomIndex(nextStepOddRow)
+
 
             // 2. update next step based on even/odd row
             if (isOddRow) {
                 nextStep = this.path[this.path.length - 1] + nextStepOddRow[randomArrId]
+                console.log(`${this.path[this.path.length - 1]} + ${nextStepOddRow[randomArrId]} = ${nextStep}`);
             } else {
                 nextStep = this.path[this.path.length - 1] + nextStepEvenRow[randomArrId]
+                console.log(`${this.path[this.path.length - 1]} + ${nextStepOddRow[randomArrId]} = ${nextStep}`);
             }
 
 
 
 
             // 3. check if nextStep keeps inside the boundaries (above 0, below grid-size), and doesn't build 3 hexagon clusters
-            if (!this.path.includes(nextStep) && 0 < nextStep && nextStep < this.sizeOfMaze && this.path[this.path.length - 2] !== nextStep - 1) {
-                // check also if the end was reached. If so add last step and break the loop
-                if (endTilesId.includes(nextStep)) {
-                    this.path.push(nextStep);
-                    // break;
-                } else {
-                    this.path.push(nextStep);
-                }
-            } else {
+
+            if (!checkNextMove(nextStep, this.path, this.sizeOfMaze)) {
                 continue;
+            } else {
+                this.path.push(nextStep);
             }
         }
-        console.log(startTilesId, endTilesId);
+
+        console.log(startTilesId, endTilesId, this.path);
         this.previewSolution();
     }
 
