@@ -105,10 +105,8 @@ class Maze {
         // create variable to hold next step
         let nextStep;
 
-
         // repeatedly get tile-connections until an endTileId is selected
-        for (let i = 0; i < this.sizeOfMaze; i++) {
-
+        while (!endTilesId.includes(nextStep)) {
             // 1. check the current row
             switch (true) {
                 case this.path[this.path.length - 1] / this.hexagonsPerRow <= 1:
@@ -141,7 +139,7 @@ class Maze {
                 // check also if the end was reached. If so add last step and break the loop
                 if (endTilesId.includes(nextStep)) {
                     this.path.push(nextStep);
-                    break;
+                    // break;
                 } else {
                     this.path.push(nextStep);
                 }
@@ -156,7 +154,7 @@ class Maze {
     /* Time the maze */
     startTimer() {
         this.countdown;
-console.log(this.path);
+        console.log(this.path);
         this.intervalId2 = setInterval(() => {
             document.getElementById("game-timer").innerHTML = `<p>Time left: ${this.countdown} seconds</p>`
             this.countdown--;
@@ -269,7 +267,7 @@ console.log(this.path);
             } else if (this.path[this.clickedTileCount - 1] === (parseInt(e.target.id))) {
                 e.currentTarget.style["background-color"] = "rgb(231, 19, 164)";
             } else if (this.path.includes(parseInt(e.target.id))) {
-                 this.clickedTileCount -= 1;
+                this.clickedTileCount -= 1;
             } else {
                 this.lives -= 1
                 if (this.lives === 0) {
@@ -291,60 +289,36 @@ console.log(this.path);
     }
 
 
-    /* start from the beginning */
-    restart() {
-        const restartBtn = document.getElementById("restart")
-
-        restartBtn.addEventListener('click', () => {
-            location.reload();
-        })
-    }
-
 
     /* change to end-screen for losing */
     lostGame() {
         clearInterval(this.intervalId2)
 
         this.gameScreen.style.display = "none";
+        this.gameEndScreen.style.display = "flex";
         document.body.style.backgroundImage = "url(/Arktos-Realm/img/noise.jpg)";
         document.getElementById("title").style.color = "white";
-        this.gameEndScreen.style.display = "flex";
 
+        let finalNote = document.getElementById("losing-note")
         if (this.lives === 0) {
-            this.gameEndScreen.innerHTML = `
-            <div class="flex-column lost">
+            finalNote.innerHTML = `
             <h2>You didn't make it</h2>
             <div id="out-of-live">
                 <p>you ran out of lives</p>
-            </div>
-            <div>
-            <button type="button" class="buttons" id="restart">Restart</button>
-            </div>
             </div>`
         } else if (this.countdown === 0) {
-            this.gameEndScreen.innerHTML = `
-            <div class="flex-column lost">
+            finalNote.innerHTML = `
             <h2>You didn't make it</h2>
             <div id="out-of-time">
                 <p>you ran out of time</p>
-            </div>
-            <div>
-            <button type="button" class="buttons" id="restart">Restart</button>
-            </div>
             </div>`
         } else {
             this.gameEndScreen.innerHTML = `
-            <div class="flex-column lost">
             <h2>Well, that didn't work out</h2>
             <div id="loser">
             <p>Do you want to try again?</p>
-            </div>
-            <div>
-            <button type="button" class="buttons" id="restart">Restart</button>
-            </div>
             </div>`
         }
-        this.restart()
     }
 
 
@@ -358,6 +332,7 @@ console.log(this.path);
         document.body.style.backgroundRepeat = "no-repeat";
         document.getElementById("title").style.color = "white";
         document.getElementById("winner-screen").style.display = "flex";
+
 
     }
 }
