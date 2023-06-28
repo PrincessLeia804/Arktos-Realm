@@ -3,8 +3,7 @@
 body {
    background-image: url(/Arktos-Realm/img/background_ice.jpg);
    background-size: auto;
-   background-repeat: no-repeat;   
-   /* background-position-y: 150px; */
+   background-repeat: no-repeat;  
    font-family: 'Roboto', sans-serif;
    color: #2f3939;
 }
@@ -31,20 +30,18 @@ h4 {
   font-size: 1.8rem;
 }
 
-.flexColumn {
+.flex-column {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    border: 2px solid green;
 }
 
-.flexRow {
+.flex-row {
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  border: 2px solid darkgreen;
 }
 
 .buttons {
@@ -191,11 +188,29 @@ h4 {
   #end-screen {
     display: none;
     align-items: stretch;
-    height: 40vmax;
-    margin: 10% 15%;
+    margin-top: 10%;
     flex-direction: column;
-    justify-content: space-evenly;
-    background-color: rgba(243, 244, 245, 0.8);
+    justify-content: center;
+    margin: 10% 20%;
+    /* border: 2px solid green; */
+    border-radius: 20px;
+    background-color: rgba(41, 41, 41, 0.9); 
+    padding: 20px;
+}
+
+.lost {
+  color: white;
+  font-size: 3.2rem;
+}
+
+.lost h2, p {
+  border-radius: 10%;
+  margin: 20px;
+}
+
+#restart {
+  margin-top: 40px;
+  width: 200px;
 }
 
 

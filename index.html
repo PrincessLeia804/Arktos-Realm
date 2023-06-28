@@ -8,20 +8,20 @@
   </head>
   <body>
     <!-- Always visible -->
-    <h1>Arktos Realm - Let the hunt begin</h1>
+    <h1 id="title">Arktos Realm - Let the hunt begin</h1>
 
     <!-- start screen, initally visible -->
-    <div id="start-screen" class="flexColumn">
+    <div id="start-screen" class="flex-column">
       <div>
         <img src="" alt="Tabaluga and Arktos" />
       </div>
-      <div class="flexColumn">
+      <div class="flex-column">
         <h3>Find your way across the Ice</h3>
         <p>
           Be careful though! Every step counts - the ice won't hold for long
         </p>
       </div>
-      <div class="flexRow">
+      <div class="flex-row">
         <button type="button" class="buttons" id="start-easy">Easy</button>
         <button type="button" class="buttons" id="start-hard">Hard</button>
       </div>
@@ -29,46 +29,30 @@
 
     <!-- Game screen, initally hidden -->
     <div id="game-screen">
-      <div id="player-stats" class="flexColumn">
+      <div id="player-stats" class="flex-column">
         <h3>Your Lives</h3>
         <h4 id="playerLives"></h4>
       </div>
-      <div id="game" class="flexColumn">
+      <div id="game" class="flex-column">
           <div id="game-timer" class="buttons">
             <p>Time left: 60 seconds</p>
           </div>
         <div id="game-container" class="container">
           <!-- divs to be created via JS based on difficulty or level -->
         </div>
-        <div class="flexRow" id="game-buttons">
+        <div class="flex-row" id="game-buttons">
           <button type="button" class="buttons" id="help">Help</button>
           <button type="button" class="buttons" id="give-up">Give Up</button>
         </div>
       </div>
-      <div id="arktos" class="flexColumn">
+      <div id="arktos" class="flex-column">
         <h3>Arktos</h3>
         <!-- <img src="./img/Arktos_the_Snowman.webp" alt="Arktos"> -->
       </div>
     </div>
 
     <!-- Final screen - depending on result -->
-    <div id="end-screen">
-      <div>
-        <!-- Winner-Screen -->
-        <div id="winner">
-          <h2>We defeated Arktos</h2>
-          <div id="winner-screen">
-            <img src="" alt="happy picture" />
-          </div>
-          <div id="score">
-            <p>You reached Arktos in: x seconds</p>
-          </div>
-        </div>
-        <!-- Loser-Screen -->
-        <div id="loser">
-
-        </div>
-      </div>
+    <div id="end-screen" class="lost">
     </div>
     <!-- Link js.files here -->
     <script type="text/javascript" src="./src/game.js"></script>

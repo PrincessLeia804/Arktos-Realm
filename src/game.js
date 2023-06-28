@@ -274,25 +274,42 @@ class Maze {
 
     lostGame() {
         this.gameScreen.style.display = "none";
+        document.body.style.backgroundImage = "url(/Arktos-Realm/img/noise.jpg)";
+        document.getElementById("title").style.color =  "white";
         this.gameEndScreen.style.display = "flex";
 
         if (this.lives === 0){
             this.gameEndScreen.innerHTML = `
+            <div class="flex-column lost">
             <h2>You didn't make it</h2>
             <div id="out-of-live">
                 <p>you ran out of lives</p>
+            </div>
+            <div>
+            <button type="button" class="buttons" id="restart">Restart</button>
+            </div>
             </div>`
         } else if (this.countdown === 0) {
             this.gameEndScreen.innerHTML = `
+            <div class="flex-column lost">
             <h2>You didn't make it</h2>
-            <div id="out-of-live">
+            <div id="out-of-time">
                 <p>you ran out of time</p>
+            </div>
+            <div>
+            <button type="button" class="buttons" id="restart">Restart</button>
+            </div>
             </div>`
         } else {
             this.gameEndScreen.innerHTML = `
+            <div class="flex-column lost">
             <h2>Well, that didn't work out</h2>
             <div id="loser">
             <p>Do you want to try again?</p>
+            </div>
+            <div>
+            <button type="button" class="buttons" id="restart">Restart</button>
+            </div>
             </div>`
         }
 
