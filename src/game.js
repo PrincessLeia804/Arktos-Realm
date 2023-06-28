@@ -152,6 +152,7 @@ class Maze {
         this.previewSolution();
     }
 
+    /* Time the maze */
     startTimer() {
         this.countdown;
 
@@ -167,7 +168,9 @@ class Maze {
 
     }
 
-    previewSolution() {     //light the way at the beginning of the game
+
+    /* Show the solution once at the start */
+    previewSolution() {
 
         let solution;
         let counter = 0
@@ -199,6 +202,8 @@ class Maze {
         this.play()
     }
 
+
+    /* receive a hint for the next tile */
     getHelp() {
         this.helpCount
         const helpButton = document.getElementById("help")
@@ -207,13 +212,13 @@ class Maze {
         const clickForHelp = (e) => {
             this.helpCount--
 
-            if(this.helpCount < 0){
+            if (this.helpCount < 0) {
                 helpButton.removeEventListener("click", clickForHelp)
             } else {
-            let nextTile = document.querySelector(`[id="${this.path[this.clickedTileCount]}"]`)
-            console.log(nextTile);
-            nextTile.style["background-color"] = "rgb(231, 19, 164)";
-            this.clickedTileCount++
+                let nextTile = document.querySelector(`[id="${this.path[this.clickedTileCount]}"]`)
+                console.log(nextTile);
+                nextTile.style["background-color"] = "rgb(231, 19, 164)";
+                this.clickedTileCount++
             }
         }
 
@@ -221,12 +226,14 @@ class Maze {
         helpButton.addEventListener("click", clickForHelp);
     }
 
+
+    /* end the game early*/
     giveUp() {
         const giveUpButton = document.getElementById("give-up")
 
         // Click event listener
         const clickGoodbye = (e) => {
-           this.lostGame()
+            this.lostGame()
         }
 
         // Add event listeners for game buttons
@@ -254,17 +261,26 @@ class Maze {
             this.clickedTileCount += 1
 
 
-            if (this.path[this.clickedTileCount - 1] === (parseInt(e.target.id))) {
+
+
+            if (this.clickedTileCount === this.path.length && this.path[this.clickedTileCount - 1] === (parseInt(e.target.id))) {
                 e.currentTarget.style["background-color"] = "rgb(231, 19, 164)";
+                this.wonGame();
+            } else if (this.path[this.clickedTileCount - 1] === (parseInt(e.target.id))) {
+                e.currentTarget.style["background-color"] = "rgb(231, 19, 164)";
+            } else if (this.path.includes(parseInt(e.target.id))) {
+                 this.clickedTileCount -= 1;
             } else {
                 this.lives -= 1
                 if (this.lives === 0) {
                     removeListeners();
                     this.lostGame();
+                } else {
+                    this.clickedTileCount -= 1
+                    document.getElementById("playerLives").innerHTML = `${this.lives}`
                 }
-                this.clickedTileCount -= 1
-                document.getElementById("playerLives").innerHTML = `${this.lives}`
             }
+
         }
 
 
@@ -274,6 +290,8 @@ class Maze {
         }
     }
 
+
+    /* start from the beginning */
     restart() {
         const restartBtn = document.getElementById("restart")
 
@@ -283,13 +301,14 @@ class Maze {
     }
 
 
+    /* change to end-screen for losing */
     lostGame() {
         this.gameScreen.style.display = "none";
         document.body.style.backgroundImage = "url(/Arktos-Realm/img/noise.jpg)";
-        document.getElementById("title").style.color =  "white";
+        document.getElementById("title").style.color = "white";
         this.gameEndScreen.style.display = "flex";
 
-        if (this.lives === 0){
+        if (this.lives === 0) {
             this.gameEndScreen.innerHTML = `
             <div class="flex-column lost">
             <h2>You didn't make it</h2>
@@ -324,6 +343,18 @@ class Maze {
             </div>`
         }
         this.restart()
+    }
+
+
+    /* change to end-screen for winning */
+    wonGame() {
+        this.gameScreen.style.display = "none";
+        document.body.style.backgroundImage = "url(https://www.awn.com/sites/default/files/styles/original/public/image/attached/1048301-stanlee2.jpg?itok=G57WBTad)";
+        document.body.style.backgroundSize = "cover";
+        document.body.style.backgroundRepeat = "no-repeat";
+        document.getElementById("title").style.color = "white";
+        this.gameEndScreen.style.display = "flex";
+
     }
 }
 
