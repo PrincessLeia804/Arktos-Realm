@@ -15,7 +15,8 @@
       <div class="flex-column">
         <h3>Find your way across the Ice</h3>
         <p>
-          Be careful though!<br>Every step counts - the ice won't hold for long & the clock is ticking
+          Be careful though!<br />Every step counts - the ice won't hold for
+          long & the clock is ticking
         </p>
       </div>
       <div class="flex-row">
@@ -31,9 +32,9 @@
         <h4 id="playerLives"></h4>
       </div>
       <div id="game" class="flex-column">
-          <div id="game-timer" class="buttons disabled">
-            <p>Time left: 60 seconds</p>
-          </div>
+        <div id="game-timer" class="buttons disabled">
+          <p>Time left: 30 seconds</p>
+        </div>
         <div id="game-container" class="container">
           <!-- divs to be created via JS based on difficulty or level -->
         </div>
@@ -48,9 +49,19 @@
       </div>
     </div>
 
-    <!-- Final screen - depending on result -->
-    <div id="end-screen" class="lost">
+    <!-- Winner-Screen -->
+    <div id="winner-screen">
+      <div class="flex-column">
+        <h2>YOU DID IT!</h2>
+        <div>
+          <button type="button" class="buttons" id="restart">Try again?</button>
+          <div></div>
+        </div>
+      </div>
     </div>
+
+    <!-- Final screen - depending on result -->
+    <div id="end-screen" class="lost"></div>
     <!-- Link js.files here -->
     <script type="text/javascript" src="./src/game.js"></script>
     <script type="text/javascript" src="./src/player.js"></script>

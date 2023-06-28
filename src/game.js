@@ -16,6 +16,7 @@ class Maze {
         this.lives = 5;
         this.clickedTileCount = 0;
         this.helpCount = 2;
+        this.intervalId2;
         this.isGameOver = false; // true, when all ids have been clicked in the correct order
     }
 
@@ -40,7 +41,6 @@ class Maze {
             this.hexagonsPerRow += 5;
             this.hexagonsPerColumn += 3;
         }
-        console.log(this.hexagonsPerRow);
 
         // calculate size of hexagon - 10px for equally sized rows
         this.hexagonSize = Math.ceil((containerWidth - ((containerWidth / this.hexagonsPerRow) / 2)) / this.hexagonsPerRow)
@@ -149,19 +149,20 @@ class Maze {
                 continue;
             }
         }
+        console.log(startTilesId, endTilesId);
         this.previewSolution();
     }
 
     /* Time the maze */
     startTimer() {
         this.countdown;
-
-        const intervalId2 = setInterval(() => {
+console.log(this.path);
+        this.intervalId2 = setInterval(() => {
             document.getElementById("game-timer").innerHTML = `<p>Time left: ${this.countdown} seconds</p>`
             this.countdown--;
 
             if (this.countdown == 0) {
-                clearInterval(intervalId2)
+                clearInterval(this.intervalId2)
                 this.lostGame();
             }
         }, 1000);
@@ -216,7 +217,6 @@ class Maze {
                 helpButton.removeEventListener("click", clickForHelp)
             } else {
                 let nextTile = document.querySelector(`[id="${this.path[this.clickedTileCount]}"]`)
-                console.log(nextTile);
                 nextTile.style["background-color"] = "rgb(231, 19, 164)";
                 this.clickedTileCount++
             }
@@ -303,6 +303,8 @@ class Maze {
 
     /* change to end-screen for losing */
     lostGame() {
+        clearInterval(this.intervalId2)
+
         this.gameScreen.style.display = "none";
         document.body.style.backgroundImage = "url(/Arktos-Realm/img/noise.jpg)";
         document.getElementById("title").style.color = "white";
@@ -348,12 +350,14 @@ class Maze {
 
     /* change to end-screen for winning */
     wonGame() {
+        clearInterval(this.intervalId2)
+
         this.gameScreen.style.display = "none";
         document.body.style.backgroundImage = "url(https://www.awn.com/sites/default/files/styles/original/public/image/attached/1048301-stanlee2.jpg?itok=G57WBTad)";
         document.body.style.backgroundSize = "cover";
         document.body.style.backgroundRepeat = "no-repeat";
         document.getElementById("title").style.color = "white";
-        this.gameEndScreen.style.display = "flex";
+        document.getElementById("winner-screen").style.display = "flex";
 
     }
 }

@@ -196,7 +196,6 @@ p {
   #end-screen {
     display: none;
     align-items: stretch;
-    margin-top: 10%;
     flex-direction: column;
     justify-content: center;
     margin: 10% 20%;
@@ -223,4 +222,26 @@ p {
 }
 
 
+#winner-screen {
+  height: 200px;
+  display: none;
+  align-items: stretch;
+  margin-top: 10%;
+  flex-direction: column;
+  justify-content: center;
+  margin: 20% 20%;
+  border-radius: 20px;
+  background-color: rgba(245, 245, 255, 0.6); 
+  padding: 20px;
+}
+
+#winner-screen button {
+  margin-top: 20px;
+}
+
+#winner-screen h2 {
+  margin-bottom: 0px;
+  color: black;
+  font-size: 2.5rem;
+}
 
