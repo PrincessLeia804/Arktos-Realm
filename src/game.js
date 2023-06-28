@@ -14,6 +14,8 @@ class Maze {
         this.path = [] //hexagon ids - randomly chosen
         this.timeCount = 60;
         this.lives = 5;
+        this.clickedTileCount = 0;
+        this.helpCount = 2;
         this.isGameOver = false; // true, when all ids have been clicked in the correct order
     }
 
@@ -31,11 +33,10 @@ class Maze {
         // 1. create maze grid based on user's screen size (width, height of game container) 
         let containerWidth = document.getElementById("game-container").offsetWidth;
         const containerHeight = document.getElementById("game-container").offsetHeight;
-        console.log(containerWidth, containerHeight);
 
 
         // update for hard-mode and add tiles
-        if(!this.gameModeEasy){
+        if (!this.gameModeEasy) {
             this.hexagonsPerRow + 5;
         }
 
@@ -154,14 +155,14 @@ class Maze {
 
         const intervalId2 = setInterval(() => {
             document.getElementById("game-timer").innerHTML = `<p>Time left: ${countdown} seconds</p>`
-            countdown --;
+            countdown--;
 
             if (countdown == 0) {
                 clearInterval(intervalId2)
                 this.lostGame();
-                } 
+            }
         }, 1000);
-    
+
     }
 
     previewSolution() {     //light the way at the beginning of the game
@@ -196,9 +197,36 @@ class Maze {
         this.play()
     }
 
+    getHelp() {
+        this.helpCount
+        const helpButton = document.getElementById("help")
+
+        // Click event listener
+        const clickForHelp = (e) => {
+            this.helpCount--
+
+            if(this.helpCount < 0){
+                helpButton.removeEventListener("click", clickForHelp)
+            } else {
+            let nextTile = document.querySelector(`[id="${this.path[this.clickedTileCount]}"]`)
+            console.log(nextTile);
+            nextTile.style["background-color"] = "rgb(231, 19, 164)";
+            this.clickedTileCount++
+            }
+        }
+
+        // Add event listeners for game buttons
+        helpButton.addEventListener("click", clickForHelp);
+
+    }
+
+
+
     play() {
+        this.getHelp()
+
         let allHexagons = document.querySelectorAll(".hexagon")
-        let clickedTileCount = 0;
+        this.clickedTileCount
 
         // Remove all event listeners
         const removeListeners = () => {
@@ -209,10 +237,10 @@ class Maze {
 
         // Click event listener
         const clickHandler = (e) => {
-            clickedTileCount += 1
+            this.clickedTileCount += 1
 
 
-            if (this.path[clickedTileCount - 1] === (parseInt(e.target.id))) {
+            if (this.path[this.clickedTileCount - 1] === (parseInt(e.target.id))) {
                 e.currentTarget.style["background-color"] = "rgb(231, 19, 164)";
             } else {
                 this.lives -= 1
@@ -220,7 +248,7 @@ class Maze {
                     removeListeners();
                     this.lostGame();
                 }
-                clickedTileCount -= 1
+                this.clickedTileCount -= 1
                 document.getElementById("playerLives").innerHTML = `${this.lives}`
             }
         }
@@ -230,7 +258,6 @@ class Maze {
         for (let i = 0; i < allHexagons.length; i++) {
             allHexagons[i].addEventListener("click", clickHandler);
         }
-
     }
 
     lostGame() {
