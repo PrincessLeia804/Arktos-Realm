@@ -217,13 +217,25 @@ class Maze {
 
         // Add event listeners for game buttons
         helpButton.addEventListener("click", clickForHelp);
+    }
 
+    giveUp() {
+        const giveUpButton = document.getElementById("give-up")
+
+        // Click event listener
+        const clickGoodbye = (e) => {
+           this.lostGame()
+        }
+
+        // Add event listeners for game buttons
+        giveUpButton.addEventListener("click", clickGoodbye);
     }
 
 
 
     play() {
         this.getHelp()
+        this.giveUp()
 
         let allHexagons = document.querySelectorAll(".hexagon")
         this.clickedTileCount
