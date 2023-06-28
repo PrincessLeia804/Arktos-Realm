@@ -4,7 +4,7 @@ class Maze {
     constructor() {
         this.startScreen = document.getElementById("start-screen");
         this.gameScreen = document.getElementById("game-screen");
-        this.gameLostScreen = document.getElementById("loser");
+        this.gameEndScreen = document.getElementById("end-screen");
         this.player = null;
         this.gameModeEasy = true;
         this.sizeOfMaze = 0;
@@ -12,7 +12,7 @@ class Maze {
         this.hexagonsPerRow = 9;
         this.hexagonsPerColumn = 5;
         this.path = [] //hexagon ids - randomly chosen
-        this.timeCount = 60;
+        this.countdown = 60;
         this.lives = 5;
         this.clickedTileCount = 0;
         this.helpCount = 2;
@@ -151,13 +151,13 @@ class Maze {
     }
 
     startTimer() {
-        let countdown = 60;
+        this.countdown;
 
         const intervalId2 = setInterval(() => {
-            document.getElementById("game-timer").innerHTML = `<p>Time left: ${countdown} seconds</p>`
-            countdown--;
+            document.getElementById("game-timer").innerHTML = `<p>Time left: ${this.countdown} seconds</p>`
+            this.countdown--;
 
-            if (countdown == 0) {
+            if (this.countdown == 0) {
                 clearInterval(intervalId2)
                 this.lostGame();
             }
@@ -274,7 +274,27 @@ class Maze {
 
     lostGame() {
         this.gameScreen.style.display = "none";
-        this.gameLostScreen.style.display = "flex";
+        this.gameEndScreen.style.display = "flex";
+
+        if (this.lives === 0){
+            this.gameEndScreen.innerHTML = `
+            <h2>You didn't make it</h2>
+            <div id="out-of-live">
+                <p>you ran out of lives</p>
+            </div>`
+        } else if (this.countdown === 0) {
+            this.gameEndScreen.innerHTML = `
+            <h2>You didn't make it</h2>
+            <div id="out-of-live">
+                <p>you ran out of time</p>
+            </div>`
+        } else {
+            this.gameEndScreen.innerHTML = `
+            <h2>Well, that didn't work out</h2>
+            <div id="loser">
+            <p>Do you want to try again?</p>
+            </div>`
+        }
 
     }
 }

@@ -87,7 +87,7 @@ h4 {
 
 /* Game Screen Setup */
 #game-screen {
-    display: flex;
+    display: none;
     justify-content: space-between;
     border: 2px solid brown;
     flex-direction: row;
@@ -198,23 +198,5 @@ h4 {
     background-color: rgba(243, 244, 245, 0.8);
 }
 
-
-  #winner {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    align-items: stretch;
-    height: 40vmax;
-    border: 2px solid red;
-  }
-
-  #loser {
-    display: none;
-    flex-direction: column;
-    justify-content: space-around;
-    align-items: stretch;
-    height: 40vmax;
-    border: 2px solid black;
-  }
 
 
