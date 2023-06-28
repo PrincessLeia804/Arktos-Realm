@@ -11,6 +11,7 @@ body {
 h1 {
     text-align: center;
     font-size: 3rem;
+    letter-spacing: .2rem;
 }
 
 h2 {
@@ -201,15 +202,17 @@ h4 {
 .lost {
   color: white;
   font-size: 3.2rem;
+  letter-spacing: .2rem ;
+  border-radius: 10%;
 }
 
-.lost h2, p {
-  border-radius: 10%;
-  margin: 20px;
+.lost p {
+  margin: 0px;
+  font-size: 1.5rem;
 }
 
 #restart {
-  margin-top: 40px;
+  margin-top: 50px;
   width: 200px;
 }
 

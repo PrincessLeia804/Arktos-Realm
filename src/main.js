@@ -2,7 +2,7 @@
 window.addEventListener('load', () => {
     const startBtnEasy = document.getElementById("start-easy")
     const startBtnHard = document.getElementById("start-hard")
-    // const restartBtn = document.getElementById("restart")
+
 
     let game = new Maze();
 
@@ -20,7 +20,4 @@ window.addEventListener('load', () => {
         startGame()
     })
 
-    // restartBtn.addEventListener('click', () => {
-    //     location.reload;
-    // })
 })

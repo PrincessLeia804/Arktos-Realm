@@ -272,6 +272,15 @@ class Maze {
         }
     }
 
+    restart() {
+        const restartBtn = document.getElementById("restart")
+
+        restartBtn.addEventListener('click', () => {
+            location.reload();
+        })
+    }
+
+
     lostGame() {
         this.gameScreen.style.display = "none";
         document.body.style.backgroundImage = "url(/Arktos-Realm/img/noise.jpg)";
@@ -312,7 +321,7 @@ class Maze {
             </div>
             </div>`
         }
-
+        this.restart()
     }
 }
 
