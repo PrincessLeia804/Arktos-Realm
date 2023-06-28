@@ -8,8 +8,9 @@ class Maze {
         this.player = null;
         this.gameModeEasy = true;
         this.sizeOfMaze = 0;
-        this.hexagonsPerRow = 0;
-        this.hexagonsPerColumn = 0;
+        this.hexagonSize = 0;
+        this.hexagonsPerRow = 9;
+        this.hexagonsPerColumn = 5;
         this.path = [] //hexagon ids - randomly chosen
         this.timeCount = 60;
         this.lives = 5;
@@ -29,6 +30,8 @@ class Maze {
 
         // 1. create maze grid based on user's screen size (width, height of game container) 
         let containerWidth = document.getElementById("game-container").offsetWidth;
+        const containerHeight = document.getElementById("game-container").offsetHeight;
+        console.log(containerWidth, containerHeight);
 
 
         // check if easy-mode and reduce container width
@@ -40,12 +43,12 @@ class Maze {
         // }
 
 
-        const containerHeight = document.getElementById("game-container").offsetHeight;
+        
 
 
-
-        this.hexagonsPerRow = Math.ceil(containerWidth / 108)
-        this.hexagonsPerColumn = Math.floor(containerHeight / 100)
+        this.hexagonSize = Math.ceil((containerWidth - ((containerWidth / this.hexagonsPerRow) / 2)) / this.hexagonsPerRow)
+        // this.hexagonsPerRow = Math.ceil(containerWidth / 108)
+        // this.hexagonsPerColumn = Math.ceil(containerHeight / 100)
 
         // 3. set amount of hexagons based on the calculation before
         this.sizeOfMaze = (this.hexagonsPerColumn) * (this.hexagonsPerRow)
@@ -56,6 +59,7 @@ class Maze {
             let addDiv = document.createElement('div')
             addDiv.setAttribute("id", i)
             addDiv.setAttribute("class", "hexagon")
+            document.getElementById("game").style.setProperty("--s", `${this.hexagonSize - 10}px`)
 
             document.getElementById("game-container").appendChild(addDiv);
         }
