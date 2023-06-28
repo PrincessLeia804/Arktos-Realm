@@ -149,6 +149,21 @@ class Maze {
         this.previewSolution();
     }
 
+    startTimer() {
+        let countdown = 60;
+
+        const intervalId2 = setInterval(() => {
+            document.getElementById("game-timer").innerHTML = `<p>Time left: ${countdown} seconds</p>`
+            countdown --;
+
+            if (countdown == 0) {
+                clearInterval(intervalId2)
+                this.lostGame();
+                } 
+        }, 1000);
+    
+    }
+
     previewSolution() {     //light the way at the beginning of the game
 
         let solution;
@@ -173,31 +188,15 @@ class Maze {
                         element.removeAttribute("style")
                         element.setAttribute("class", "hexagon")
                     })
+                    this.startTimer();
 
-                }, 3000);
+                }, 1500);
             }
         }, 200);
         this.play()
     }
 
-    startTimer() {
-        let countdown = 60;
-
-        const intervalId2 = setInterval(() => {
-            document.getElementById("game-timer").innerHTML = `<p>Time left: ${countdown} seconds</p>`
-            countdown --;
-
-            if (countdown == 0) {
-                clearInterval(intervalId2)
-                this.lostGame();
-                } 
-        }, 1000);
-    
-    }
-
     play() {
-        this.startTimer()
-
         let allHexagons = document.querySelectorAll(".hexagon")
         let clickedTileCount = 0;
 
