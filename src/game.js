@@ -180,7 +180,24 @@ class Maze {
         this.play()
     }
 
+    startTimer() {
+        let countdown = 60;
+
+        const intervalId2 = setInterval(() => {
+            document.getElementById("game-timer").innerHTML = `<p>Time left: ${countdown} seconds</p>`
+            countdown --;
+
+            if (countdown == 0) {
+                clearInterval(intervalId2)
+                this.lostGame();
+                } 
+        }, 1000);
+    
+    }
+
     play() {
+        this.startTimer()
+
         let allHexagons = document.querySelectorAll(".hexagon")
         let clickedTileCount = 0;
 

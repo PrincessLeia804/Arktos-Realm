@@ -17,7 +17,9 @@
       </div>
       <div class="flexColumn">
         <h3>Find your way across the Ice</h3>
-        <p>Be careful though! Every step counts - the ice won't hold for long</p>
+        <p>
+          Be careful though! Every step counts - the ice won't hold for long
+        </p>
       </div>
       <div class="flexRow">
         <button type="button" class="buttons" id="start-easy">Easy</button>
@@ -28,13 +30,19 @@
     <!-- Game screen, initally hidden -->
     <div id="game-screen">
       <div id="player-stats" class="flexColumn">
-          <h3>Your Lives</h3>
-          <h4 id="playerLives"></h4>
+        <h3>Your Lives</h3>
+        <h4 id="playerLives"></h4>
       </div>
       <div id="game" class="flexColumn">
+          <div id="game-timer" class="buttons">
+            <p>Time left: 60 seconds</p>
+          </div>
         <div id="game-container" class="container">
-            <!-- divs to be created via JS based on difficulty or level -->
-         
+          <!-- divs to be created via JS based on difficulty or level -->
+        </div>
+        <div class="flexRow" id="game-buttons">
+          <button type="button" class="buttons" id="help">Help</button>
+          <button type="button" class="buttons" id="give-up">Give Up</button>
         </div>
       </div>
       <div id="arktos" class="flexColumn">
@@ -50,7 +58,7 @@
         <div id="winner">
           <h2>We defeated Arktos</h2>
           <div id="winner-screen">
-            <img src="" alt="happy picture">
+            <img src="" alt="happy picture" />
           </div>
           <div id="score">
             <p>You reached Arktos in: x seconds</p>
@@ -60,7 +68,7 @@
         <div id="loser">
           <h2>We were too late..</h2>
           <div id="loser-screen">
-            <img src="" alt="sad picture">
+            <img src="" alt="sad picture" />
           </div>
           <div id="score">
             <p>You ran out of time / lives</p>

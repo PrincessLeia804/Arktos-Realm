@@ -56,7 +56,6 @@ h4 {
 	background-color:#599bb3;
 	border-radius:8px;
 	display:inline-block;
-	cursor:pointer;
 	color:#ffffff;
 	font-size:20px;
 	font-weight:bold;
@@ -67,6 +66,7 @@ h4 {
 
 .buttons:hover {
   background:linear-gradient(to bottom, #408c99 5%, #599bb3 100%);
+  cursor:pointer;
 	background-color:#408c99;
 }
  
@@ -100,6 +100,20 @@ h4 {
     box-shadow: 0px 10px 14px -7px #276873;
 }
 
+#game-timer {
+  align-self: flex-end;
+  margin: 4%;
+}
+
+#game-buttons {
+  margin: 2% 0% 5% 0%;
+  width: 400px;
+}
+
+#help, #give-up {
+  width: 150px;
+}
+
 #player-stats {
     flex-direction: column;
     width: 25%;
@@ -113,7 +127,6 @@ h4 {
     align-items: center;
     width: 50%;
     flex-shrink: 0;
-    padding: 4%;
     display:flex;
     --s: 100px;  /* size */
     --m: 4px;    /* margin */
@@ -139,6 +152,7 @@ h4 {
     border: 2px solid blue;
     width: 1000px;
     height: 500px;
+    margin: 0% 5%;
 }
   
   .container div {
