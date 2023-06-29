@@ -19,10 +19,8 @@ function checkOddRow (arr, hex){
 
 
 /* check nextMove for exceptions (out of bound, already picked) */
-function checkNextMove(newPos, arr, gridSize) {
+function checkNextMove(newPos, arr, gridSize, endArr) {
     switch(true) {
-        case arr[arr.length - 2] === newPos - 1 && arr.includes(newPos):
-            return true;
         case newPos <= 0 || newPos > gridSize:
         case arr[arr.length - 2] === newPos - 1:
             return false;
@@ -31,3 +29,4 @@ function checkNextMove(newPos, arr, gridSize) {
     }
 }
 
+ 

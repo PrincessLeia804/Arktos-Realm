@@ -127,9 +127,14 @@ class Maze {
 
 
             // 3. check if nextStep keeps inside the boundaries (above 0, below grid-size), and doesn't build 3 hexagon clusters
-
-            if (!checkNextMove(nextStep, this.path, this.sizeOfMaze)) {
-                continue;
+            if (!checkNextMove(nextStep, this.path, this.sizeOfMaze, endTilesId)) {
+                // avoid breaking the loop before an end-tile could be chosen
+                if(endTilesId.includes(nextStep)){
+                    nextStep - 1;
+                    continue;
+                }else{
+                    continue;
+                }
             } else {
                 this.path.push(nextStep);
             }
@@ -301,10 +306,10 @@ class Maze {
                 <p>you ran out of time</p>
             </div>`
         } else {
-            this.gameEndScreen.innerHTML = `
+            finalNote.innerHTML = `
             <h2>Well, that didn't work out</h2>
             <div id="loser">
-            <p>Do you want to try again?</p>
+                 <p>Do you want to try again?</p>
             </div>`
         }
     }
