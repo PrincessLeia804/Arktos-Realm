@@ -98,29 +98,26 @@ class Maze {
         // 2. Create random next step based on nextStep-Arrays for even/odd rows
 
         // create random Index-Id
-        let randomArrId;
+        let randomArrIndex;
         // create boolean to track which row the current hexagon is and which nextStep-Array needs to be used
         let isOddRow;
         // create variable to hold next step
         let nextStep = 0;
 
-            // repeatedly get tile-connections until an endTileId is selected
+        // repeatedly get tile-connections until an endTileId is selected
         while (!endTilesId.includes(nextStep)){ 
-            // for(let i = 0; i < 20; i++){
             isOddRow = checkOddRow(this.path, this.hexagonsPerRow)
 
 
             // 1. create random index to chose the next step, both arrays have the same length
-            randomArrId = randomIndex(nextStepOddRow)
+            randomArrIndex = randomIndex(nextStepOddRow)
 
 
             // 2. update next step based on even/odd row
             if (isOddRow) {
-                nextStep = this.path[this.path.length - 1] + nextStepOddRow[randomArrId]
-                console.log(`${this.path[this.path.length - 1]} + ${nextStepOddRow[randomArrId]} = ${nextStep}`);
+                nextStep = this.path[this.path.length - 1] + nextStepOddRow[randomArrIndex]
             } else {
-                nextStep = this.path[this.path.length - 1] + nextStepEvenRow[randomArrId]
-                console.log(`${this.path[this.path.length - 1]} + ${nextStepOddRow[randomArrId]} = ${nextStep}`);
+                nextStep = this.path[this.path.length - 1] + nextStepEvenRow[randomArrIndex]
             }
 
 
@@ -139,15 +136,12 @@ class Maze {
                 this.path.push(nextStep);
             }
         }
-
-        console.log(startTilesId, endTilesId, this.path);
         this.previewSolution();
     }
 
     /* Time the maze */
     startTimer() {
         this.countdown;
-        console.log(this.path);
         this.intervalId2 = setInterval(() => {
             document.getElementById("game-timer").innerHTML = `<p>Time left: ${this.countdown} seconds</p>`
             this.countdown--;
