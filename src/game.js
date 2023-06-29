@@ -92,8 +92,8 @@ class Maze {
         // build random path and store in this.path
 
         // 1. Choose random starting point out of startTiles Array
-        let startTile = randomIndex(startTilesId) 
-        this.path.push(startTilesId[startTile])
+        // let startTile = randomIndex(startTilesId) 
+        this.path.push(startTilesId[1])
 
 
         // 2. Create random next step based on nextStep-Arrays for even/odd rows
