@@ -203,7 +203,9 @@ class Maze {
             } else {
                 let nextTile = document.querySelector(`[id="${this.path[this.clickedTileCount]}"]`)
                 nextTile.style["background-color"] = "rgb(231, 19, 164)";
-                this.clickedTileCount++
+                let timeoutId2 = setTimeout (() =>{
+                    nextTile.style["background-color"] = "rgb(66, 104, 186)";
+                }, 1000);
             }
         }
 
