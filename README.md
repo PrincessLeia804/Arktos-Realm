@@ -3,7 +3,7 @@ Find your way across the ice and help Tabaluga!
 
 ## Play the Game 
 
-[Click here to see deployed game](url)
+[Click here to see deployed game](https://princessleia804.github.io/Arktos-Realm/)
 
 ### Description
 Arktos keeps hold of the Infinity Stones. Help Tabaluga to catch Arktos and retrieve the stones, before he will do unspeakable things.
