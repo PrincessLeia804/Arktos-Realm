@@ -5,69 +5,75 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
     <link rel="Stylesheet" href="./style/style.css" />
+    <link rel="preload" href="https://www.awn.com/sites/default/files/styles/original/public/image/attached/1048301-stanlee2.jpg?itok=G57WBTad" as="image">
+    <link rel="preload" href="/Arktos-Realm/img/noise.jpg" as="image">    
   </head>
   <body>
     <!-- Always visible -->
-    <h1>Arktos Realm - Let the hunt begin</h1>
+    <h1 id="title">Arktos Realm - Let the hunt begin</h1>
 
     <!-- start screen, initally visible -->
-    <div id="start-screen">
-      <div class="flex">
-        <img src="" alt="Tabaluga and Arktos" />
-      </div>
-      <div class="flex">
+    <div id="start-screen" class="flex-column">
+      <div class="flex-column">
         <h3>Find your way across the Ice</h3>
+        <p>
+          Be careful though!<br />Every step counts - the ice won't hold for
+          long & the clock is ticking
+        </p>
       </div>
-      <div class="flex">
-        <button type="button" class="flex buttons" id="start-easy">Easy</button>
-        <button type="button" class="flex buttons" id="start-hard">Hard</button>
+      <div class="flex-row">
+        <button type="button" class="buttons" id="start-easy">Easy</button>
+        <button type="button" class="buttons" id="start-hard">Hard</button>
       </div>
     </div>
 
     <!-- Game screen, initally hidden -->
     <div id="game-screen">
-      <div id="player-stats" class="flex">
-          <h3>Your Lives</h3>
-          <h4 id="playerLives"></h4>
+      <div id="player-stats" class="flex-column">
+        <h3>Your Lives</h3>
+        <h4 id="playerLives"></h4>
       </div>
-      <div id="game" class="flex">
-        <h3>Game Screen</h3>
+      <div id="game" class="flex-column">
+        <div id="game-timer" class="buttons disabled">
+          <p>Time left: 30 seconds</p>
+        </div>
         <div id="game-container" class="container">
-            <!-- divs to be created via JS based on difficulty or level -->
-         
+          <!-- divs to be created via JS based on difficulty or level -->
+        </div>
+        <div class="flex-row" id="game-buttons">
+          <button type="button" class="buttons" id="help">Help</button>
+          <button type="button" class="buttons" id="give-up">Give Up</button>
         </div>
       </div>
-      <div id="arktos" class="flex">
+      <div id="arktos" class="flex-column">
         <h3>Arktos</h3>
+        <!-- <img src="./img/Arktos_the_Snowman.webp" alt="Arktos"> -->
+      </div>
+    </div>
+
+    <!-- Winner-Screen -->
+    <div id="winner-screen">
+      <div class="flex-column">
+        <h2>YOU DID IT!</h2>
+        <div>
+          <button type="button" class="buttons" id="restart">Try again?</button>
+          <div></div>
+        </div>
       </div>
     </div>
 
     <!-- Final screen - depending on result -->
-    <div id="end-screen">
-      <div>
-        <!-- Winner-Screen -->
-        <div id="winner">
-          <h2>We defeated Arktos</h2>
-          <div id="winner-screen">
-            <img src="" alt="happy picture">
-          </div>
-          <div id="score">
-            <p>You reached Arktos in: x seconds</p>
-          </div>
+    <div id="end-screen" class="lost">
+        <div class="flex-column">
+          <div id="losing-note">
         </div>
-        <!-- Loser-Screen -->
-        <div id="loser">
-          <h2>We were too late..</h2>
-          <div id="loser-screen">
-            <img src="" alt="sad picture">
-          </div>
-          <div id="score">
-            <p>You ran out of time / lives</p>
-          </div>
         </div>
-      </div>
+        <div class="flex-column">
+            <button type="button" class="buttons" id="start-over">Restart</button>
+          </div>
     </div>
-    <!-- Link js.files here -->
+    <!-- Linked js.files -->
+    <script type="text/javascript" src="./src/functions.js"></script>
     <script type="text/javascript" src="./src/game.js"></script>
     <script type="text/javascript" src="./src/player.js"></script>
     <script type="text/javascript" src="./src/main.js"></script>

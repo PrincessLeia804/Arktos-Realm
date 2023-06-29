@@ -3,15 +3,15 @@
 body {
    background-image: url(/Arktos-Realm/img/background_ice.jpg);
    background-size: auto;
-   background-repeat: no-repeat;   
-   /* background-position-y: 150px; */
+   background-repeat: no-repeat;  
    font-family: 'Roboto', sans-serif;
+   color: #2f3939;
 }
 
 h1 {
     text-align: center;
     font-size: 3rem;
-    color: #008f8f;
+    letter-spacing: .2rem;
 }
 
 h2 {
@@ -31,22 +31,34 @@ h4 {
   font-size: 1.8rem;
 }
 
-.flex {
+p {
+  text-align: center;
+  line-height: 1.8rem;
+}
+
+.flex-column {
     display: flex;
+    flex-direction: column;
     justify-content: center;
-    border: 2px solid green;
+    align-items: center;
+}
+
+.flex-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
 }
 
 .buttons {
-    margin: 15px;
-    align-items: stretch;
-    /* button styling */
-    box-shadow: 0px 10px 14px -7px #276873;
+  margin: 15px;
+  align-items: stretch;
+  /* button styling */
+  box-shadow: 0px 10px 14px -7px #276873;
 	background:linear-gradient(to bottom, #599bb3 5%, #408c99 100%);
 	background-color:#599bb3;
 	border-radius:8px;
 	display:inline-block;
-	cursor:pointer;
 	color:#ffffff;
 	font-size:20px;
 	font-weight:bold;
@@ -56,7 +68,8 @@ h4 {
 }
 
 .buttons:hover {
-    background:linear-gradient(to bottom, #408c99 5%, #599bb3 100%);
+  background:linear-gradient(to bottom, #408c99 5%, #599bb3 100%);
+  cursor:pointer;
 	background-color:#408c99;
 }
  
@@ -65,10 +78,12 @@ h4 {
     display: flex;
     align-items: stretch;
     height: 40vmax;
-    margin: 10% 15%;
+    margin: 5% 15%;
     flex-direction: column;
     justify-content: center;
-    background-color: rgba(125, 201, 236, 0.8);
+    background-color: rgba(243, 244, 245, 0.8);
+    border-radius: 20px;
+    box-shadow: 0px 10px 14px -7px #276873;
 }
 
 
@@ -77,36 +92,61 @@ h4 {
 #game-screen {
     display: none;
     justify-content: space-between;
-    border: 2px solid green;
     flex-direction: row;
     align-items: stretch;
-    height: 50vmax;
-    width: 50vmax
-    margin: 1%;
-    background-color: rgba(125, 201, 236, 0.8);
+    margin: 3%;
+    background-color: rgba(243, 244, 245, 0.8);
+    border-radius: 20px;
+    box-shadow: 0px 10px 14px -7px #276873;
+}
+
+#game-timer {
+  align-self: center;
+  margin: 4%;
+  padding: 0% 5%;
+}
+.disabled {
+  pointer-events: none;
+  opacity: 0.8;
+}
+
+#game-buttons {
+  margin: 2% 0% 5% 0%;
+  width: 400px;
+}
+
+#help, #give-up {
+  width: 150px;
 }
 
 #player-stats {
     flex-direction: column;
-    min-width: 25%;
+    width: 25%;
+    flex-shrink: 1;
+    padding: 5px;
 }
 
 #game {
     flex-direction: column;
     justify-content: space-evenly;
     align-items: center;
-    min-width: 50%;
+    width: 50%;
+    flex-shrink: 0;
     display:flex;
-    margin: 20px;
     --s: 100px;  /* size */
     --m: 4px;    /* margin */
     --f: calc(1.732 * var(--s) + 4 * var(--m)  - 1px);
 }
 
 #arktos {
-    flex-direction: column;
-    min-width: 25%;
+  flex-direction: column;
+  width: 25%;
+  flex-shrink: 1;
+  padding: 10px;
 }
+ /* #arktos img {
+  object-fit: contain;
+ } */
 
 
 
@@ -114,9 +154,10 @@ h4 {
 
 .container {
     font-size: 0; /*disable white space between inline block element */
-    border: 2px solid blue;
-    min-width: 90%;
-    min-height: 50%;
+    width: 800px;
+    height: 400px;
+    margin: 0% 5%;
+    padding-top: 5%;
 }
   
   .container div {
@@ -155,30 +196,52 @@ h4 {
   #end-screen {
     display: none;
     align-items: stretch;
-    height: 40vmax;
-    margin: 10% 15%;
     flex-direction: column;
-    justify-content: space-evenly;
-    background-color: rgba(125, 201, 236, 0.8);
+    justify-content: center;
+    margin: 10% 20%;
+    border-radius: 20px;
+    background-color: rgba(41, 41, 41, 0.9); 
+    padding: 20px;
+}
+
+.lost {
+  color: white;
+  font-size: 3.2rem;
+  letter-spacing: .2rem ;
+  border-radius: 10%;
+}
+
+.lost p {
+  margin: 0px;
+  font-size: 1.5rem;
+}
+
+#restart {
+  margin-top: 50px;
+  width: 200px;
 }
 
 
-  #winner {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    align-items: stretch;
-    height: 40vmax;
-    border: 2px solid red;
-  }
+#winner-screen {
+  height: 200px;
+  display: none;
+  align-items: stretch;
+  margin-top: 10%;
+  flex-direction: column;
+  justify-content: center;
+  margin: 20% 20%;
+  border-radius: 20px;
+  background-color: rgba(245, 245, 255, 0.6); 
+  padding: 20px;
+}
 
-  #loser {
-    display: none;
-    flex-direction: column;
-    justify-content: space-around;
-    align-items: stretch;
-    height: 40vmax;
-    border: 2px solid black;
-  }
+#winner-screen button {
+  margin-top: 20px;
+}
 
+#winner-screen h2 {
+  margin-bottom: 0px;
+  color: black;
+  font-size: 2.5rem;
+}
 
