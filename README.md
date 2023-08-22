@@ -15,32 +15,21 @@ The ice is very thin and will break if you take a wrong step.
 ### MVP
 - Players can chose the difficulty level before starting the game
 - Hovering over the difficulty button will show details on the differences
-- Upon starting a new game a pop-up will explain how to move across the ice and inform the player of the time limit, the help-, give-up- and surprise-buttons 
+- Upon starting a new game a pop-up will explain how to move across the ice and inform the player of the time limit, the help-, and give-up-buttons 
 - The way through the hexagon-shaped maze will first light up step by step and stay visible for 2 seconds before disappearing
-- The player then klicks its way through step by step through the maze
+- The player then clicks its way through step by step through the maze
 - If the player choses the correct step, the ice floe will light up and the character moves to the new position
 - If the player choses a wrong step, the try ends and a life will be taken. If a life remains, the player may try again.
-- A timer will limit the time to solve to 60 seconds
-- The help button will reveal once the next step
+- A timer will limit the time to solve to 30 seconds starting after the route preview
+- The help button will reveal 2x per round the next step
 - The give up button will finish the game
-- The surprise button holds, well... a surprise
 
 
 
 ### Backlog
-_List of features you might implement after the MVP_
  - Create levels and keep track of players' progress
  - Add a leaderboard
- - Add special animations and sounds
+ - Add special CSS animations and sounds
+ - Add breakpoints
 
-### Data structure
-_List of classes and methods_
-
-
-### States by States Transitions
-_List of states (views) of your game_
-
-
-### Task
-_List of tasks in order of priority_
 
