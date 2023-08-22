@@ -44,10 +44,3 @@ _List of states (views) of your game_
 ### Task
 _List of tasks in order of priority_
 
-
-### Links
-
-- [Trello Link](https://trello.com)
-- [Slides Link](http://slides.com)
-- [Github repository Link](https://github.com/PrincessLeia804/Arktos-Realm.git)
-- [Deployment Link](http://github.com)
